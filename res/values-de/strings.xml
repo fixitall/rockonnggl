@@ -212,6 +212,7 @@
 <string name="back">Zurück</string>
 <string name="all">Alle</string>
 <string name="none">Keine</string>
-
+<string name="on">An</string>
+<string name="off">Aus</string>
 
 </resources>
