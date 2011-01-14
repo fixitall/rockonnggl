@@ -211,4 +211,6 @@
 	<string name="on">Activado</string>
 	<string name="off">Desactivado</string>
 
+	<string name="genre_prefix">Genero: </string>
+	
 </resources>

@@ -211,6 +211,7 @@ Le thème Tremblement de Terre necessite de traiter tes pochettes. C\'est une t�
 	<string name="on">Activé</string>
 	<string name="off">Désactivé</string>
 
+	<string name="genre_prefix">Genre : </string>
 </resources>
 
 

@@ -669,6 +669,7 @@ public class RockOnNextGenGL extends Activity {
 		    				playlistArray.add(
 		    					new Playlist(
 		    							newPlaylistID,
+		    							R.string.genre_prefix + 
 		    							genreCursor.getString(
 		    									genreCursor.getColumnIndexOrThrow(
 		    											MediaStore.Audio.Genres.NAME))
