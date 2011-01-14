@@ -2,6 +2,7 @@ package org.abrantix.rockon.rockonnggl;
 
 import java.lang.reflect.Field;
 import android.os.Build;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 
 public class APILevelChecker {
@@ -44,28 +45,7 @@ public class APILevelChecker {
 	public void hapticFeedback(View v)
 	{
 		if (SDK_INT >= 5) {
-			try {
-				Class c = Class.forName("HapticFeedbackConstants");
-				int virtualKey;
-				virtualKey = c.getField("VIRTUAL_KEY").getInt(null);
-				v.performHapticFeedback(virtualKey);
-//				v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
 		}
 	}
 }
