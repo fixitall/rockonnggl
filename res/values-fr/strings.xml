@@ -179,7 +179,7 @@ Le thème Tremblement de Terre necessite de traiter tes pochettes. C\'est une t�
 <!-- DONATE MSG -->
 <string name="donate_title">Faire un don</string>
 <string name="donate_msg">³ est une application gratuite, open source et totalment développée sur mon temps libre. Si elle te plaît, tu peux me faire un don afin que je puisse l\'améliorer.</string>
-<string name="donate_using">Donner par le biais de: </string>
+<string name="donate_using">Donner par le biais de : </string>
 <string name="donate_back_to_app">Revenir à </string>
 
 <!-- UNLOCK SCREEN -->
@@ -199,7 +199,7 @@ Le thème Tremblement de Terre necessite de traiter tes pochettes. C\'est une t�
 <!-- </string>-->
 
 	<!--	DIRECTORY FILTER	-->
-	<string name="directories_on_sdcard">Ta carte mémoire contient les répertoires suivants:</string>
+	<string name="directories_on_sdcard">Ta carte mémoire contient les répertoires suivants :</string>
 	<string name="select_all">Tout sélectionner</string>
 	<string name="unselect_all">Tout désélectionner</string>
 
@@ -211,7 +211,7 @@ Le thème Tremblement de Terre necessite de traiter tes pochettes. C\'est une t�
 	<string name="on">Activé</string>
 	<string name="off">Désactivé</string>
 
-	<string name="genre_prefix">Genre : </string>
+	<string name="genre_prefix">Genre :</string>
 </resources>
 
 
