@@ -655,16 +655,28 @@ public class RockOnNextGenGL extends Activity {
     		{
 	    		for (int i=0; i<genreCursor.getCount(); i++){
 	    			genreCursor.moveToPosition(i);
-	    			playlistArray.add(
-	    					new Playlist(
-	    							(int) (Constants.PLAYLIST_GENRE_OFFSET 
-	    								- genreCursor.getLong(
-	    										genreCursor.getColumnIndexOrThrow(
-	    												MediaStore.Audio.Genres._ID))),
-	    							genreCursor.getString(
-	    									genreCursor.getColumnIndexOrThrow(
-	    											MediaStore.Audio.Genres.NAME))
-	    					));
+
+	    			int newPlaylistID = (int) (Constants.PLAYLIST_GENRE_OFFSET 
+							- genreCursor.getLong(
+									genreCursor.getColumnIndexOrThrow(
+											MediaStore.Audio.Genres._ID)));
+
+	    			Cursor genreSongCursor = cursorUtils.getAllSongsFromPlaylist(newPlaylistID);
+	    			if(genreSongCursor != null)
+	    			{
+	    				if (genreSongCursor.getCount() > 0)
+	    				{
+		    				playlistArray.add(
+		    					new Playlist(
+		    							newPlaylistID,
+		    							getString(R.string.genre_prefix) + " " +
+		    							genreCursor.getString(
+		    									genreCursor.getColumnIndexOrThrow(
+		    											MediaStore.Audio.Genres.NAME))
+		    					));
+	    				}
+	    				genreSongCursor.close();
+	    			}
 	    		}
 	    		genreCursor.close();
     		}

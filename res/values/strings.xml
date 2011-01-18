@@ -212,5 +212,7 @@
 	<string name="none">None</string>
 	<string name="on">On</string>
 	<string name="off">Off</string>
+	
+	<string name="genre_prefix">Genre:</string>
 
 </resources>
