@@ -28,6 +28,7 @@ class WidgetCoverUtils{
 	static Bitmap getWidgetCoverBitmap(
 			String albumId, 
 			String artistName,
+			String albumName,
 			String trackName,
 			int width, 
 			int height){
@@ -41,11 +42,12 @@ class WidgetCoverUtils{
 		 * 		-- DO NOT CHANGE OTHER CODE TO MATCH THIS -- 
 		 * 
 		 */
+
     	String path = 
 //    		Constants.ROCKON_ALBUM_ART_PATH+
 //			RockOnFileUtils.validateFileName(albumId);
 			Constants.ROCKON_SMALL_ALBUM_ART_PATH+
-			RockOnFileUtils.validateFileName(albumId);
+			RockOnFileUtils.validateFileName(artistName + "-" + albumName);
     	
 		/** Access the file */
     	String albumCoverPath;

@@ -138,6 +138,7 @@ public class RockOnNextGenAppWidgetProvider extends AppWidgetProvider {
         	WidgetCoverUtils.getWidgetCoverBitmap(
 				String.valueOf(service.getAlbumId()),
 				String.valueOf(service.getArtistName()),
+				String.valueOf(service.getAlbumName()),
 				String.valueOf(service.getTrackName()),
 				Constants.REASONABLE_ALBUM_ART_SIZE,
 				Constants.REASONABLE_ALBUM_ART_SIZE);

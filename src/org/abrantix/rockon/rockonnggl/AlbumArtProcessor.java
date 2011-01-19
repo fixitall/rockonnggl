@@ -122,7 +122,7 @@ public class AlbumArtProcessor{
     			processAndSaveSmallAlbumCoverInSdCard(
     					tmpBm, 
     					tmpBuf, 
-    					RockOnFileUtils.validateFileName(albumId.toString()),
+    					RockOnFileUtils.validateFileName(artistName + "-" + albumName),
     					imgProc);
     	}
     	

@@ -151,7 +151,7 @@ public class AlbumArtImporter{
     			AlbumArtUtils.getImageSize(
         				AlbumArtUtils.getAlbumArtPath(
         	    				embeddedArtPath, 
-        	    				RockOnFileUtils.validateFileName(albumId.toString())));
+        	    				RockOnFileUtils.validateFileName(artistName + "-" + albumName)));
     		
     		/** check if image (embedded or downloaded) exists and is big enough */
     		if(
@@ -193,7 +193,7 @@ public class AlbumArtImporter{
 	    		/** Create 'normal' album cover */
 	    			if(internetArt != null){
 	//    				AlbumArtUtils.saveAlbumCoverInSdCard(internetArt, FileUtils.validateFileName(URLEncoder.encode(albumKey)));
-	    				AlbumArtUtils.saveAlbumCoverInSdCard(internetArt, RockOnFileUtils.validateFileName(albumId.toString()));
+	    				AlbumArtUtils.saveAlbumCoverInSdCard(internetArt, RockOnFileUtils.validateFileName(artistName + "-" + albumName));
 	        		}
     			}
     		}
@@ -206,7 +206,7 @@ public class AlbumArtImporter{
     		{ // fresh art download
     			AlbumArtUtils.saveSmallAlbumCoverInSdCard(
     					internetArt, 
-    					RockOnFileUtils.validateFileName(albumId.toString()));
+    					RockOnFileUtils.validateFileName(artistName + "-" + albumName));
     			internetArt.recycle();
     		} else if(embeddedArtPath != null){
     			embeddedArt = BitmapFactory.decodeFile(embeddedArtPath);
@@ -214,7 +214,7 @@ public class AlbumArtImporter{
     			{
     				AlbumArtUtils.saveSmallAlbumCoverInSdCard(
     						embeddedArt, 
-    						RockOnFileUtils.validateFileName(albumId.toString()));
+    						RockOnFileUtils.validateFileName(artistName + "-" + albumName));
     				embeddedArt.recycle();
     			} else {
     				// TODO ::::::: --- needs treatment

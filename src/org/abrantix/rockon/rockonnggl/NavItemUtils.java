@@ -118,21 +118,21 @@ public class NavItemUtils{
 	    	{
 	    	case Constants.THEME_NORMAL:
 	    		path = Constants.ROCKON_SMALL_ALBUM_ART_PATH+
-    				RockOnFileUtils.validateFileName(albumNavItem.albumId);
+    				RockOnFileUtils.validateFileName(albumNavItem.artistName + "-" + albumNavItem.albumName);
 	    		break;
 	    	case Constants.THEME_HALFTONE:
 	    		path = Constants.ROCKON_SMALL_ALBUM_ART_PATH+
-    				RockOnFileUtils.validateFileName(albumNavItem.albumId)+
+    				RockOnFileUtils.validateFileName(albumNavItem.artistName + "-" + albumNavItem.albumName)+
     				Constants.THEME_HALF_TONE_FILE_EXT;
 	    		break;
 	    	case Constants.THEME_EARTHQUAKE:
 	    		path = Constants.ROCKON_SMALL_ALBUM_ART_PATH+
-    				RockOnFileUtils.validateFileName(albumNavItem.albumId)+
+    				RockOnFileUtils.validateFileName(albumNavItem.artistName + "-" + albumNavItem.albumName)+
     				Constants.THEME_EARTHQUAKE_FILE_EXT;
 	    		break;
 	    	default:
 	    		path = Constants.ROCKON_SMALL_ALBUM_ART_PATH+
-					RockOnFileUtils.validateFileName(albumNavItem.albumId);
+					RockOnFileUtils.validateFileName(albumNavItem.artistName + "-" + albumNavItem.albumName);
 	    		break;
 	    	}
 	    
@@ -753,21 +753,21 @@ public class NavItemUtils{
 	    	{
 	    	case Constants.THEME_NORMAL:
 	    		path = Constants.ROCKON_SMALL_ALBUM_ART_PATH+
-    				RockOnFileUtils.validateFileName(artistAlbumHelper.albumId);
+    				RockOnFileUtils.validateFileName(artistAlbumHelper.artistName + "-" + artistAlbumHelper.albumName);
 	    		break;
 	    	case Constants.THEME_HALFTONE:
 	    		path = Constants.ROCKON_SMALL_ALBUM_ART_PATH+
-    				RockOnFileUtils.validateFileName(artistAlbumHelper.albumId)+
+    				RockOnFileUtils.validateFileName(artistAlbumHelper.artistName + "-" + artistAlbumHelper.albumName)+
     				Constants.THEME_HALF_TONE_FILE_EXT;
 	    		break;
 	    	case Constants.THEME_EARTHQUAKE:
 	    		path = Constants.ROCKON_SMALL_ALBUM_ART_PATH+
-    				RockOnFileUtils.validateFileName(artistAlbumHelper.albumId)+
+    				RockOnFileUtils.validateFileName(artistAlbumHelper.artistName + "-" + artistAlbumHelper.albumName)+
     				Constants.THEME_EARTHQUAKE_FILE_EXT;
 	    		break;
 	    	default:
 	    		path = Constants.ROCKON_SMALL_ALBUM_ART_PATH+
-					RockOnFileUtils.validateFileName(artistAlbumHelper.albumId);
+					RockOnFileUtils.validateFileName(artistAlbumHelper.artistName + "-" + artistAlbumHelper.albumName);
 	    		break;
 	    	}
 	    

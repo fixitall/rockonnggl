@@ -1292,7 +1292,9 @@ public class CursorUtils{
 	 * @return
 	 */
 	int oArtistColumnIndex;
+	int oArtistNameColumnIndex;
 	int oAlbumIdColumnIndex = -1;
+	int oAlbumNameColumnIndex = -1;
 	public boolean fillArtistAlbumHelperArray(
 			Cursor artistCursor, 
 			ArtistAlbumHelper[] artistAlbumHelperArray)
@@ -1303,6 +1305,7 @@ public class CursorUtils{
 		{
 			Cursor albumCursor;
 			oArtistColumnIndex = artistCursor.getColumnIndex(MediaStore.Audio.Artists._ID);
+			oArtistNameColumnIndex = artistCursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST);
 			for(int i=0; i<artistCursor.getCount(); i++)
 			{
 				try
@@ -1311,6 +1314,7 @@ public class CursorUtils{
 					if(artistAlbumHelperArray[i] == null)
 						artistAlbumHelperArray[i] = new ArtistAlbumHelper();
 					artistAlbumHelperArray[i].artistId = artistCursor.getString(oArtistColumnIndex);
+					artistAlbumHelperArray[i].artistName = artistCursor.getString(oArtistNameColumnIndex);
 					// sometimes we obtain an artistId of -1;
 					albumCursor = getAlbumListFromArtistId(artistCursor.getLong(oArtistColumnIndex));
 				}
@@ -1330,8 +1334,11 @@ public class CursorUtils{
 					{
 						if(oAlbumIdColumnIndex == -1 )
 							oAlbumIdColumnIndex = albumCursor.getColumnIndex(MediaStore.Audio.Albums._ID);
+						if(oAlbumNameColumnIndex == -1 )
+							oAlbumNameColumnIndex = albumCursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM);
 						albumCursor.moveToFirst();
 						artistAlbumHelperArray[i].albumId = albumCursor.getString(oAlbumIdColumnIndex);
+						artistAlbumHelperArray[i].albumName = albumCursor.getString(oAlbumIdColumnIndex);
 //						Log.i(TAG, "Album Id:"+artistAlbumHelperArray[i].albumId);
 					}
 					else
