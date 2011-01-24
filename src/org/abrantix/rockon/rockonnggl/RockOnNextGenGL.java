@@ -2719,7 +2719,7 @@ public class RockOnNextGenGL extends Activity {
 		@Override
 		public void onClick(View v) {
 			if(!mSearchClickHandler.hasMessages(0)){
-				APILevelChecker.getInstance().hapticFeedback(v);
+//				APILevelChecker.getInstance().hapticFeedback(v);
 				if(findViewById(R.id.search_container) ==  null)
 					showSearch();
 				else
@@ -3745,7 +3745,7 @@ public class RockOnNextGenGL extends Activity {
 	private void setupAutoCompleteSearch(int playlistId){
     	/* cursor */
 		Cursor allSongsCursor = new CursorUtils(getApplicationContext()).
-    		getAllSongsFromPlaylist(playlistId);
+			getAllSongsFromPlaylist(playlistId);
 		if(allSongsCursor != null)
 			startManagingCursor(allSongsCursor);
     		
