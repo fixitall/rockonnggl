@@ -11,6 +11,9 @@ import javax.microedition.khronos.egl.EGLDisplay;
 
 import org.abrantix.rockon.rockonnggl.R;
 
+import com.pontiflex.mobile.sdk.AdManagerFactory;
+import com.pontiflex.mobile.sdk.IAdManager;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -269,6 +272,11 @@ public class RockOnNextGenGL extends Activity {
         	showFullScreen();
         	break;
         }
+        
+        /**
+         * PontiflexAds
+         */
+        showPontiflexAds(true);
     }
     
     /** OnStart */
@@ -286,7 +294,7 @@ public class RockOnNextGenGL extends Activity {
         /**
          * Donation
          */
-        showDonation();
+        showDonation(false);
     }
     
     /** OnResume */
@@ -737,12 +745,35 @@ public class RockOnNextGenGL extends Activity {
     	}
     };
     
-    private void showDonation()
+    private void showPontiflexAds(boolean enabled) {
+    	if(!Util.hasDonated(getApplicationContext())) {
+    		int appCreateCount = 
+        		PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).
+        			getInt(Constants.prefkey_mAppCreateCount, 1);
+    		if(appCreateCount%Constants.PONTIFLEX_INTERVAL == 0)
+    			mAdHandler.sendEmptyMessageDelayed(0, 0);
+    	} 
+    }
+    
+    Handler mAdHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			IAdManager adManager = AdManagerFactory.createInstance(getApplication());
+	    	adManager.startMultiOfferActivity();	
+		}
+	};
+	
+    private void showDonation(boolean enabled)
     {
     	int appCreateCount = 
     		PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).
     			getInt(Constants.prefkey_mAppCreateCount, 1);
+ 
     	appCreateCount++;
+ 
+    	PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+    		.edit().putInt(Constants.prefkey_mAppCreateCount, appCreateCount)
+    		.commit();
     	
     	int appCreateCountForDonation = 
     		PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).
@@ -753,7 +784,7 @@ public class RockOnNextGenGL extends Activity {
 				getBoolean(Constants.prefkey_mAppHasDonated, false);
 		
 		Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-
+    	
     	if(getResources().getBoolean(R.bool.config_isMarketVersion)
     		&& appCreateCount >= appCreateCountForDonation)
     	{    			
@@ -762,7 +793,6 @@ public class RockOnNextGenGL extends Activity {
     		else
     			appCreateCountForDonation += Constants.DONATION_STANDARD_INTERVAL;
 
-        	editor.putInt(Constants.prefkey_mAppCreateCount, appCreateCount);
     		editor.putInt(Constants.prefkey_mAppCreateCountForDonation, appCreateCountForDonation);
     		
         	editor.commit();
@@ -817,7 +847,7 @@ public class RockOnNextGenGL extends Activity {
     		} catch(NameNotFoundException e) {
     		}
         	
-    		if(donationAppsInstalled <= 0) {
+    		if(donationAppsInstalled <= 0 && enabled) {
 		    	Intent i = new Intent(this, DonateActivity.class);
 		        startActivity(i);
     		}

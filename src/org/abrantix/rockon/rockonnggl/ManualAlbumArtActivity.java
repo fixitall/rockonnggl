@@ -2,6 +2,9 @@ package org.abrantix.rockon.rockonnggl;
 
 import org.abrantix.rockon.rockonnggl.R;
 
+import com.pontiflex.mobile.sdk.AdManagerFactory;
+import com.pontiflex.mobile.sdk.IAdManager;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -17,6 +20,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +33,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class ManualAlbumArtActivity extends Activity{
+	private static final String TAG = "ManualAlbumArt";
 	static long 			mAlbumId = -1;
 	GridView				mChooserGrid;
 	ManualArtChooserAdapter	mChooserAdapter;

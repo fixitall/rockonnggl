@@ -429,6 +429,9 @@ public class Constants{
 	static final int	DONATION_STANDARD_INTERVAL = 30;
 	static final int	DONATION_AFTER_HAVING_DONATED_INTERVAL = 100000;
 	
+	/** Pontiflex Ad frequency */
+	static final int	PONTIFLEX_INTERVAL = 25;
+	
 	/** Analytics */
 	static final String	ANALYTICS_MAIN_PAGE = "/RockOnNgGl";
 	static final String	ANALYTICS_MANUAL_ART_PAGE = "/ManualAlbumArt";

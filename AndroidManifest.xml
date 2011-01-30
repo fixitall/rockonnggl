@@ -131,6 +131,14 @@
 			<meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget_info_4x1"/>
 		</receiver>
 
+		<!--	PONTIFLEX STUFF		-->
+		<activity android:name="com.pontiflex.mobile.sdk.activities.MultiOfferActivity"/> 
+		<activity android:name="com.pontiflex.mobile.sdk.activities.MissingInfoActivity" android:configChanges="keyboardHidden"/> 
+		<activity android:name="com.pontiflex.mobile.sdk.activities.OfferConfirmationActivity" android:configChanges="keyboardHidden"/> 
+		<activity android:name="com.pontiflex.mobile.sdk.activities.RegistrationActivity" android:configChanges="keyboardHidden"/>
+		<activity android:name="com.pontiflex.mobile.sdk.activities.PrivacyPolicyActivity"/> 
+		<activity android:name="com.pontiflex.mobile.sdk.activities.PrivacyPolicyListActivity"/>
+		
     </application>
     
 	<supports-screens 
