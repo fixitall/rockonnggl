@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.database.MergeCursor;
+import android.database.StaleDataException;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.Environment;
@@ -1321,6 +1322,10 @@ public class CursorUtils{
 				}
 				catch(CursorIndexOutOfBoundsException e)
 				{
+					e.printStackTrace();
+					albumCursor = null;
+				}
+				catch(StaleDataException e) {
 					e.printStackTrace();
 					albumCursor = null;
 				}

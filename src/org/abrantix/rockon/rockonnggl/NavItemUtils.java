@@ -500,6 +500,9 @@ public class NavItemUtils{
 			Log.i(TAG, " - reading pixels from file failed");
     		return false;
     	}
+    	if(artistNavItem.label.isRecycled())
+    		return false;
+    	
     	/** Create bitmap */
     	artistNavItem.label.eraseColor(Color.argb(0, 0, 0, 0));
     	canvas.setBitmap(artistNavItem.label);

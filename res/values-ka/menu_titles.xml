@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="menu_option_title_get_art">
+		ქავერის გადმოწერა
+	</string>
+	<string name="menu_option_title_preferences">
+		ნასტროიკები
+	</string>
+	<string name="menu_option_title_playlist_id">
+		ფლეილისტი
+	</string>
+	<string name="menu_option_title_concerts">
+		კონცერტები
+	</string>
+	<string name="menu_option_title_releases">
+		ვერსია
+	</string>
+	<string name="menu_option_title_view_mode">
+		View Mode
+	</string>
+	<string name="menu_option_title_theme">
+		თემა
+	</string>
+	<string name="menu_option_title_equalizer">
+		ეკვალიზერი
+	</string>
+</resources>
+

@@ -12,11 +12,11 @@ import android.util.Log;
 public class Util {
 	
 	static int oDonationAppsInstalled=0;
-	static public boolean hasDonated(Context ctx) {
+	static public boolean hasDonated(Context ctx, boolean ignoreTouchesOnly) {
 		oDonationAppsInstalled = 0;
     	if(ctx.getResources().getBoolean(R.bool.config_isMarketVersion)) {    			
     		File f = new File(Constants.ROCKON_DONATION_PATH);
-    		if(!f.exists())
+    		if(!f.exists() || ignoreTouchesOnly)
     		{
             	try{
             		ComponentName cName = 

@@ -272,11 +272,13 @@ public class ProgressBarView extends View{
 		if(mBarOvalArea == null)
 			Log.i(TAG, "Oval Area is NULL");
 		
-		mProgressBitmap = 
-			Bitmap.createBitmap(
-					width, 
-					height, 
-					Bitmap.Config.ARGB_8888);
+		if(width > 0 && height > 0) {
+			mProgressBitmap = 
+				Bitmap.createBitmap(
+						width, 
+						height, 
+						Bitmap.Config.ARGB_8888);
+		}
 		
 		this.invalidate();
 	}

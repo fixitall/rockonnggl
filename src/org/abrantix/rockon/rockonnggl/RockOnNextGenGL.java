@@ -1,33 +1,25 @@
 package org.abrantix.rockon.rockonnggl;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
 
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
 
-import org.abrantix.rockon.rockonnggl.R;
-
-import com.pontiflex.mobile.sdk.AdManagerFactory;
-import com.pontiflex.mobile.sdk.IAdManager;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
@@ -44,7 +36,6 @@ import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -66,11 +57,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class RockOnNextGenGL extends Activity {
 	private final String TAG = "RockOnNextGenGL";
@@ -273,10 +259,10 @@ public class RockOnNextGenGL extends Activity {
         	break;
         }
         
-        /**
-         * PontiflexAds
-         */
-        showPontiflexAds(true);
+//        /**
+//         * PontiflexAds
+//         */
+//        showPontiflexAds(true);
     }
     
     /** OnStart */
@@ -745,23 +731,23 @@ public class RockOnNextGenGL extends Activity {
     	}
     };
     
-    private void showPontiflexAds(boolean enabled) {
-    	if(!Util.hasDonated(getApplicationContext())) {
-    		int appCreateCount = 
-        		PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).
-        			getInt(Constants.prefkey_mAppCreateCount, 1);
-    		if(appCreateCount%Constants.PONTIFLEX_INTERVAL == 0)
-    			mAdHandler.sendEmptyMessageDelayed(0, 0);
-    	} 
-    }
+//    private void showPontiflexAds(boolean enabled) {
+//    	if(!Util.hasDonated(getApplicationContext())) {
+//    		int appCreateCount = 
+//        		PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).
+//        			getInt(Constants.prefkey_mAppCreateCount, 1);
+//    		if(appCreateCount%Constants.PONTIFLEX_INTERVAL == 0)
+//    			mAdHandler.sendEmptyMessageDelayed(0, 0);
+//    	} 
+//    }
     
-    Handler mAdHandler = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			IAdManager adManager = AdManagerFactory.createInstance(getApplication());
-	    	adManager.startMultiOfferActivity();	
-		}
-	};
+//    Handler mAdHandler = new Handler() {
+//		@Override
+//		public void handleMessage(Message msg) {
+//			IAdManager adManager = AdManagerFactory.createInstance(getApplication());
+//	    	adManager.startMultiOfferActivity();	
+//		}
+//	};
 	
     private void showDonation(boolean enabled)
     {
