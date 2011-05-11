@@ -1,13 +1,17 @@
 package org.abrantix.rockon.rockonnggl;
 
+import java.net.URLEncoder;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -61,8 +65,40 @@ public class ManualAlbumArtActivity extends Activity{
     	startService(i);
     	bindService(i, mServiceConnection, BIND_AUTO_CREATE);
     	
-    	setupAdsenseOrDonation();
+//    	setupAdsenseOrDonation();
+    	setupRzPromo();
     }
+	
+	private void setupRzPromo() {
+		findViewById(R.id.adview).setVisibility(View.GONE);
+		findViewById(R.id.donate_button).setVisibility(View.GONE);
+		findViewById(R.id.rz_promo).setVisibility(View.VISIBLE);
+		findViewById(R.id.rz_promo).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try
+				{
+					Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + "com.wecamefrommars.returnzero.full"));
+			        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			        startActivity(i);
+//					Intent i = new Intent(Intent.ACTION_VIEW, 
+//					Uri.parse("market://search?q=pub:%22We%20came%20from%20Mars%22"));
+//					startActivity(i);					
+				}
+				catch(ActivityNotFoundException e)
+				{
+					e.printStackTrace();
+					Toast.makeText(
+							ManualAlbumArtActivity.this, 
+							"Error, Market is not available", 
+							Toast.LENGTH_LONG)
+						.show();
+					
+				}
+			}
+		});
+	}
 	
 	/**
 	 * If the user has donated already, do not show adsense

@@ -51,12 +51,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class RockOnNextGenGL extends Activity {
 	private final String TAG = "RockOnNextGenGL";
@@ -281,6 +284,7 @@ public class RockOnNextGenGL extends Activity {
          * Donation
          */
         showDonation(false);
+        showRzPromo();
     }
     
     /** OnResume */
@@ -749,6 +753,136 @@ public class RockOnNextGenGL extends Activity {
 //		}
 //	};
 	
+    private boolean hasDonationApps() {
+    	int donationAppsInstalled = 0;
+    	try{
+    		ComponentName cName = 
+				new ComponentName(
+					Constants.DONATION_APP_PKG_1, 
+					Constants.DONATION_APP_MAIN_ACTIVITY_1);
+			getPackageManager().
+				getActivityInfo(
+						cName,
+						0);
+			donationAppsInstalled++;
+		} catch(NameNotFoundException e) {
+		}
+		try{
+    		ComponentName cName = 
+				new ComponentName(
+						Constants.DONATION_APP_PKG_2, 
+						Constants.DONATION_APP_MAIN_ACTIVITY_2);
+			getPackageManager().
+				getActivityInfo(
+						cName,
+						0);
+			donationAppsInstalled++;
+		} catch(NameNotFoundException e) {
+		}
+		try{
+    		ComponentName cName = 
+				new ComponentName(
+						Constants.DONATION_APP_PKG_3, 
+						Constants.DONATION_APP_MAIN_ACTIVITY_3);
+			getPackageManager().
+				getActivityInfo(
+						cName,
+						0);
+			donationAppsInstalled++;
+		} catch(NameNotFoundException e) {
+		}
+		try{
+    		ComponentName cName = 
+				new ComponentName(
+						Constants.DONATION_APP_PKG_4, 
+						Constants.DONATION_APP_MAIN_ACTIVITY_4);
+			getPackageManager().
+				getActivityInfo(
+						cName,
+						0);
+			donationAppsInstalled++;
+		} catch(NameNotFoundException e) {
+		}
+		return donationAppsInstalled > 0;
+    }
+    
+    private void showRzPromo() {
+    	boolean hasDonated = 
+			PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).
+				getBoolean(Constants.prefkey_mAppHasDonated, false);
+    	
+    	if(!hasDonated && !hasDonationApps()) {
+	    	int appCreateCount = 
+	    		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.getInt(Constants.prefkey_mAppCreateCount, 1);
+	    	boolean hasShown = 
+	    		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.getBoolean("shownRzPromo", false);
+	    	boolean neverShowAgain = 
+	    		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.getBoolean("neverShowRzPromo", false);
+    		
+	    	if(!hasShown) {
+	    		showRZDlg();
+	    		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.edit().putBoolean("shownRzPromo", true)
+	    		.commit();
+	    	} else if(!neverShowAgain && appCreateCount%20 == 0) {
+	    		Log.i(TAG, "NOT CANCELED AND "+appCreateCount%10+" "+appCreateCount);
+	    		showRZDlg();
+	    	}
+    	}
+    }
+    
+    static private void openRZInMarket(Context ctx) {
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.wecamefrommars.returnzero.full"));
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ctx.startActivity(i);
+    }
+    
+    private void showRZDlg() {
+    	View v = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.rz_promo_dialog, null);
+    	v.findViewById(R.id.rz_dlg_img).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openRZInMarket(getApplicationContext());
+			}
+		});
+//    	v.findViewById(R.id.never_again).setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//			}
+//		});
+    	((CheckBox)v.findViewById(R.id.never_again_check)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.edit().putBoolean("neverShowRzPromo", isChecked)
+	    		.commit();
+			}
+		});
+    	
+    	AlertDialog.Builder adb = new AlertDialog.Builder(RockOnNextGenGL.this)
+    		.setTitle(R.string.rz_dlg_title)
+    		.setView(v)
+    		.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					openRZInMarket(getApplicationContext());
+				}
+			})
+			.setNegativeButton(getString(R.string.playlist_dialog_cancel), null);
+    	adb.show();
+    	
+    	if(mService != null) {
+    		try {
+				mService.trackPage(Constants.ANALYTICS_RZ_PROMO);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+    	}
+    }
+    
     private void showDonation(boolean enabled)
     {
     	int appCreateCount = 
@@ -770,7 +904,7 @@ public class RockOnNextGenGL extends Activity {
 				getBoolean(Constants.prefkey_mAppHasDonated, false);
 		
 		Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-    	
+		
     	if(getResources().getBoolean(R.bool.config_isMarketVersion)
     		&& appCreateCount >= appCreateCountForDonation)
     	{    			
@@ -783,57 +917,57 @@ public class RockOnNextGenGL extends Activity {
     		
         	editor.commit();
         	
-        	int donationAppsInstalled = 0;
-        	try{
-        		ComponentName cName = 
-    				new ComponentName(
-						Constants.DONATION_APP_PKG_1, 
-						Constants.DONATION_APP_MAIN_ACTIVITY_1);
-    			getPackageManager().
-    				getActivityInfo(
-    						cName,
-    						0);
-    			donationAppsInstalled++;
-    		} catch(NameNotFoundException e) {
-    		}
-    		try{
-        		ComponentName cName = 
-    				new ComponentName(
-    						Constants.DONATION_APP_PKG_2, 
-    						Constants.DONATION_APP_MAIN_ACTIVITY_2);
-    			getPackageManager().
-    				getActivityInfo(
-    						cName,
-    						0);
-    			donationAppsInstalled++;
-    		} catch(NameNotFoundException e) {
-    		}
-    		try{
-        		ComponentName cName = 
-    				new ComponentName(
-    						Constants.DONATION_APP_PKG_3, 
-    						Constants.DONATION_APP_MAIN_ACTIVITY_3);
-    			getPackageManager().
-    				getActivityInfo(
-    						cName,
-    						0);
-    			donationAppsInstalled++;
-    		} catch(NameNotFoundException e) {
-    		}
-    		try{
-        		ComponentName cName = 
-    				new ComponentName(
-    						Constants.DONATION_APP_PKG_4, 
-    						Constants.DONATION_APP_MAIN_ACTIVITY_4);
-    			getPackageManager().
-    				getActivityInfo(
-    						cName,
-    						0);
-    			donationAppsInstalled++;
-    		} catch(NameNotFoundException e) {
-    		}
+//        	int donationAppsInstalled = 0;
+//        	try{
+//        		ComponentName cName = 
+//    				new ComponentName(
+//						Constants.DONATION_APP_PKG_1, 
+//						Constants.DONATION_APP_MAIN_ACTIVITY_1);
+//    			getPackageManager().
+//    				getActivityInfo(
+//    						cName,
+//    						0);
+//    			donationAppsInstalled++;
+//    		} catch(NameNotFoundException e) {
+//    		}
+//    		try{
+//        		ComponentName cName = 
+//    				new ComponentName(
+//    						Constants.DONATION_APP_PKG_2, 
+//    						Constants.DONATION_APP_MAIN_ACTIVITY_2);
+//    			getPackageManager().
+//    				getActivityInfo(
+//    						cName,
+//    						0);
+//    			donationAppsInstalled++;
+//    		} catch(NameNotFoundException e) {
+//    		}
+//    		try{
+//        		ComponentName cName = 
+//    				new ComponentName(
+//    						Constants.DONATION_APP_PKG_3, 
+//    						Constants.DONATION_APP_MAIN_ACTIVITY_3);
+//    			getPackageManager().
+//    				getActivityInfo(
+//    						cName,
+//    						0);
+//    			donationAppsInstalled++;
+//    		} catch(NameNotFoundException e) {
+//    		}
+//    		try{
+//        		ComponentName cName = 
+//    				new ComponentName(
+//    						Constants.DONATION_APP_PKG_4, 
+//    						Constants.DONATION_APP_MAIN_ACTIVITY_4);
+//    			getPackageManager().
+//    				getActivityInfo(
+//    						cName,
+//    						0);
+//    			donationAppsInstalled++;
+//    		} catch(NameNotFoundException e) {
+//    		}
         	
-    		if(donationAppsInstalled <= 0 && enabled) {
+    		if(!hasDonationApps() && enabled) {
 		    	Intent i = new Intent(this, DonateActivity.class);
 		        startActivity(i);
     		}

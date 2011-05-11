@@ -103,7 +103,8 @@ public class MediaButtonIntentReceiver extends BroadcastReceiver {
 
             int keycode = event.getKeyCode();
             int action = event.getAction();
-            long eventtime = event.getEventTime();
+//            long eventtime = event.getEventTime();
+            long eventtime = System.currentTimeMillis();
 
             long amountToSeek = 0;
             

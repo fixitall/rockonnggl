@@ -81,7 +81,7 @@ public class EqualizerActivity extends Activity{
 //		savedInstance.putBoolean(MANUAL_SEARCH, mManualSearch);
 	}
 	
-//	@Override
+	@Override
 	public void onAttachedToWindow() {
 		// Some reflection for 1.5
 		try {

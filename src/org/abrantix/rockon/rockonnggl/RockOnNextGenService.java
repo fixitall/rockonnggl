@@ -363,7 +363,8 @@ public class RockOnNextGenService extends Service {
     		EqSettings settings = readEqSettingsFromPreferences();
     		mEqualizerWrapper = new EqualizerWrapper(settings);
     	}
-    	if(mPreferences.getBoolean(Constants.prefKey_mEqualizerEnabled, false)) {
+//    	if(mPreferences.getBoolean(Constants.prefKey_mEqualizerEnabled, false)) {
+        if(mEqualizerWrapper.mSettings.isEnabled()) {
 			try {
 				Method m = MediaPlayer.class.getMethod("getAudioSessionId", new Class[]{});
 	    		mEqualizerWrapper.enable(0, (Integer) m.invoke(mPlayer.mMediaPlayer, new Object[]{}));
@@ -379,6 +380,7 @@ public class RockOnNextGenService extends Service {
 			} catch (InvocationTargetException e) {
 				e.printStackTrace();
 			}
+    	} else {
     	}
     }
     
@@ -2690,14 +2692,17 @@ public class RockOnNextGenService extends Service {
 	 * @param bandIdx
 	 * @param level
 	 */
+	double lastLevelChange = 0;
 	void setEqBandLevel(int bandIdx, int level) {
-		Log.i(TAG, "Setting band: "+bandIdx+" to "+(short)level);
-		mEqualizerWrapper.setBandLevel((short)bandIdx, (short) level);
-		/* save equalizer settings in the preferences */
-		try {
-			mPreferences.edit().putString(Constants.prefKey_mEqualizerSettings, mEqualizerWrapper.getSettings()).commit();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(System.currentTimeMillis() - lastLevelChange > 500) {
+			Log.i(TAG, "Setting band: "+bandIdx+" to "+(short)level);
+			mEqualizerWrapper.setBandLevel((short)bandIdx, (short) level);
+			/* save equalizer settings in the preferences */
+			try {
+				mPreferences.edit().putString(Constants.prefKey_mEqualizerSettings, mEqualizerWrapper.getSettings()).commit();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -82,5 +82,11 @@
 		    android:textSize="40dp"
 		    android:text="@string/donate_title"
 		    android:background="@drawable/donate_button_bg"/>
+		<ImageView
+			android:id="@+id/rz_promo"
+			android:layout_width="fill_parent"
+		    android:layout_height="64dp"
+		    android:src="@drawable/rz_promo"
+		    android:scaleType="centerInside"/>
 	</LinearLayout>
 </LinearLayout>

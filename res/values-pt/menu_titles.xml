@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="menu_option_title_get_art">
-		ქავერის გადმოწერა
+		Busca de capas
 	</string>
 	<string name="menu_option_title_preferences">
-		ნასტროიკები
+		Preferências
 	</string>
 	<string name="menu_option_title_playlist_id">
-		ფლეილისტი
+		Listas de reprodução
 	</string>
 	<string name="menu_option_title_concerts">
-		კონცერტები
+		Shows
 	</string>
 	<string name="menu_option_title_releases">
-		ვერსია
+		Álbuns
 	</string>
 	<string name="menu_option_title_view_mode">
-		View Mode
+		Aparência
 	</string>
 	<string name="menu_option_title_theme">
-		თემა
+		Tema
 	</string>
 	<string name="menu_option_title_equalizer">
-		ეკვალიზერი
+		Equalizador
 	</string>
 </resources>
+
 

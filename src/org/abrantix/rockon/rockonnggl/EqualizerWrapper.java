@@ -60,6 +60,8 @@ public class EqualizerWrapper {
 	}
 	
 	public void disable() {
+		readPropertiesFromEq();
+		
 		// setEnabled
 		try {
 			Method m = mEqualizer.getClass().getMethod("setEnabled", new Class[]{boolean.class});
@@ -75,14 +77,15 @@ public class EqualizerWrapper {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		// HOW TO DISABLE THIS? Just make everything flat?
+		// ... yeah, making everything flat
+//		for(short i=0; i<getNumberOfBands(); i++) {
+//			setBandLevel(i, (short) (getBandLevelRange()[0] + (getBandLevelRange()[1]-getBandLevelRange()[0])/2), true);
+//		}
 		// my own stuff
 		mEnabled = false;
 		mSettings.setDisabled();
-		// HOW TO DISABLE THIS? Just make everything flat?
-		// ... yeah, making everything flat
-		for(short i=0; i<getNumberOfBands(); i++) {
-			setBandLevel(i, (short) (getBandLevelRange()[0] + (getBandLevelRange()[1]-getBandLevelRange()[0])/2), true);
-		}
+		
 	}
 	
 	static public boolean isSupported() {
@@ -222,6 +225,7 @@ public class EqualizerWrapper {
 			try {
 				Method m = mEqualizer.getClass().getMethod("setBandLevel", new Class[]{short.class, short.class});
 				m.invoke(mEqualizer, new Object[]{band, level});
+				Log.i(TAG, "band: "+band+" level: "+level);
 				if(!keepSettings)
 					mSettings.mBandLevels[band] = level;
 			} catch (Exception e) {
