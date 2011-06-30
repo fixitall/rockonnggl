@@ -73,6 +73,7 @@ public class ManualAlbumArtActivity extends Activity{
 		findViewById(R.id.adview).setVisibility(View.GONE);
 		findViewById(R.id.donate_button).setVisibility(View.GONE);
 		findViewById(R.id.rz_promo).setVisibility(View.VISIBLE);
+//		findViewById(R.id.rz_promo).setVisibility(View.GONE);
 		findViewById(R.id.rz_promo).setOnClickListener(new OnClickListener() {
 			
 			@Override

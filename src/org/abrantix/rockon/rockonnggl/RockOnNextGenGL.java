@@ -835,7 +835,7 @@ public class RockOnNextGenGL extends Activity {
     }
     
     static private void openRZInMarket(Context ctx) {
-        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.wecamefrommars.returnzero.full"));
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.wecamefrommars.returnzero.beta"));
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ctx.startActivity(i);
     }

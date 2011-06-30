@@ -15,10 +15,12 @@ import android.database.StaleDataException;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.graphics.Shader.TileMode;
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -860,5 +862,53 @@ public class NavItemUtils{
 		return true;
 	}
 	
-
+	/**
+	 * Fill the last cover with a certain color or gradient
+	 * @param bm
+	 * @return
+	 */
+	static boolean fillLastCover(Bitmap bm, boolean top) {
+		try {
+			Canvas c = new Canvas();
+			Paint p = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG|Paint.FILTER_BITMAP_FLAG);
+			LinearGradient lg = null;
+			if(top) {
+				lg = new LinearGradient(
+					0, 0, 
+					0, bm.getHeight(), 
+					new int[] { 
+						Color.argb(255, 96, 96, 96), 
+						Color.argb(255, 24, 24, 24), 
+						Color.argb(255, 0, 0, 0), 
+						Color.argb(255, 0, 0, 0) }, 
+					new float[] {
+						0.f,
+						.5f,
+						.75f,
+						1.0f },
+					TileMode.CLAMP);
+			} else {
+				lg = new LinearGradient(
+					0, bm.getHeight(), 
+					0, 0, 
+					new int[] { 
+						Color.argb(255, 96, 96, 96), 
+						Color.argb(255, 24, 24, 24), 
+						Color.argb(255, 0, 0, 0), 
+						Color.argb(255, 0, 0, 0) }, 
+					new float[] {
+						0.f,
+						.5f,
+						.75f,
+						1.0f },
+					TileMode.CLAMP);
+			}
+			c.setBitmap(bm);
+			p.setShader(lg);
+			c.drawRect(0, 0, bm.getWidth(), bm.getHeight(), p);
+			return true;
+		} catch(Exception e) {
+			return false;
+		}
+	}
 }

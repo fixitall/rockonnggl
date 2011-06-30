@@ -869,8 +869,11 @@ public class RockOnCubeRenderer extends RockOnRenderer implements GLSurfaceView.
 //    					mTheme);
     			try
     			{
-	    			if(!mNavItem[cacheIndex].cover.isRecycled())
-	    				mNavItem[cacheIndex].cover.eraseColor(Color.argb(127, 122, 122, 0));
+	    			if(!mNavItem[cacheIndex].cover.isRecycled()) {
+//	    				mNavItem[cacheIndex].cover.eraseColor(Color.argb(127, 122, 122, 0));
+	    				NavItemUtils.fillLastCover(mNavItem[cacheIndex].cover, navIndex < 0);
+	    			}
+	    			
 	    			// we cannot change the bitmap reference of the item
 	    			// we need to write to the existing reference
 	    			if(!mNavItem[cacheIndex].label.isRecycled())
