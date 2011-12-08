@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="menu_option_title_get_art">
-		Download Platenhoezen
+		Albumcover ophalen
 	</string>
 	<string name="menu_option_title_preferences">
 		Voorkeuren
@@ -13,16 +13,15 @@
 		Concerten
 	</string>
 	<string name="menu_option_title_releases">
-		Uitgave
+		Meer van deze Artiest
 	</string>
 	<string name="menu_option_title_view_mode">
-		Alleen kijken
+		Weergave
 	</string>
 	<string name="menu_option_title_theme">
-		Thema
+		Thema\'s
 	</string>
 	<string name="menu_option_title_equalizer">
-		Toonregeling
+		Equalizer
 	</string>
 </resources>
-

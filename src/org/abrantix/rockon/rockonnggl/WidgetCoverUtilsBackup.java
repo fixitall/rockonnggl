@@ -22,7 +22,7 @@ import android.graphics.Shader.TileMode;
 import android.os.Build;
 import android.util.Log;
 
-class WidgetCoverUtils{
+class WidgetCoverUtilsBackup{
 	static final String TAG = "WidgetCoverUtils";
 	
 	static Bitmap getWidgetCoverBitmap(
@@ -91,11 +91,13 @@ class WidgetCoverUtils{
 	
 	/* optimization */
 	static int	textWidth;
+	static int	stringIdx;
 	private static Bitmap createWickedBitmapFromCover(
 			Bitmap cover,
 			String artistName,
 			String trackName)
 	{
+		
 		final int	textOffset = 54;
 		
 		Bitmap wickedBitmap = Bitmap.createBitmap(
@@ -109,7 +111,7 @@ class WidgetCoverUtils{
 		paint.setFilterBitmap(true);
 //		paint.setColor(Color.TRANSPARENT);
 		
-		BiDiCanvas canvas = new BiDiCanvas();
+		Canvas canvas = new Canvas();
 		canvas.setBitmap(wickedBitmap);
 		
 		if(Integer.valueOf(Build.VERSION.SDK) < 4)
@@ -187,14 +189,47 @@ class WidgetCoverUtils{
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 			paint.setTextAlign(Align.CENTER);
 			paint.setTextSize(22.f);
-	        trackName = BiDiReorder.reorder(trackName, cover.getWidth(), paint, "...");
+			stringIdx = paint.breakText(
+					trackName, 
+					true, 
+					cover.getWidth(), 
+					null);
+			if(stringIdx < trackName.length())
+			{
+				trackName = trackName.substring(
+						0, 
+						stringIdx-3);
+				trackName += "...";
+			} else {
+				trackName = trackName.substring(
+						0, 
+						stringIdx);
+			}
 			textWidth = (int)paint.measureText(trackName);
 			
 			/* measure artistName */
 //			paint.setTypeface(Typeface.DEFAULT);
 			paint.setTextSize(18.f);
-            artistName = BiDiReorder.reorder(artistName, cover.getWidth(), paint, "...");
-			textWidth = (int) Math.max(textWidth, paint.measureText(artistName));
+			stringIdx = paint.breakText(
+					artistName, 
+					true, 
+					cover.getWidth(), 
+					null);
+			if(stringIdx < artistName.length())
+			{
+				artistName = artistName.substring(
+						0, 
+						stringIdx-3);
+				artistName += "...";
+			} else {
+				artistName = artistName.substring(
+						0, 
+						stringIdx);
+			}
+			textWidth = (int)
+				Math.max(
+						paint.measureText(artistName), 
+						textWidth);
 			
 			/* some margin for the label */
 			textWidth += 12;

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!--	VERSION	-->
+    <string name="preference_key_version">Version</string>
+    
+	<!--	DOWNLOAD STATE    -->
+    <string name="preference_key_downloading_art_state">DownloadingArt</string>
+    
+	<!--	PLAYLIST STATE    -->
+<!--    <string name="preference_key_playlist_id">mPlaylistId</string>-->
+        
+	<!--	HEADSET BUTTONS    -->
+    <string name="preference_key_use_headset_buttons">UseHeadset</string>
+    <string name="preference_title_use_headset_buttons">Usa auricolari</string>
+    <string name="preference_summary_use_headset_buttons">La pressione del pulsante sul tuo auricolare controlla la riproduzione.</string>
+
+	<!--	LOCK PORTRAIT    -->
+    <string name="preference_key_lock_portrait">LockPortrait</string>
+    <string name="preference_title_lock_portrait">Blocca in verticale</string>
+    <string name="preference_summary_lock_portrait">Evita la rotazione in orizzontale.</string>
+
+	<!--	LOCK SCREEN    -->
+    <string name="preference_key_lock_screen">LockScreen</string>
+    <string name="preference_title_lock_screen">Schermata di blocco</string>
+    <string name="preference_summary_lock_screen">Mostra i controlli sulla schermata di blocco.</string>
+
+	<!--	FULL SCREEN    -->
+    <string name="preference_key_full_screen">mFullScreen</string>
+    <string name="preference_title_full_screen">Schermo intero</string>
+    <string name="preference_summary_full_screen">Esegue il riproduttore a schermo intero.</string>
+
+	<!--	CONTROLS ON BOTTOM    -->
+    <string name="preference_key_controls_on_bottom">mControlsOnBottom</string>
+    <string name="preference_title_controls_on_bottom">Controlli da pollice</string>
+    <string name="preference_summary_controls_on_bottom">Colloca i controlli in fondo allo schermo.</string>
+
+	<!-- 	QUEUE ON CLICK -->
+	<string name="preference_key_queue_on_click">mQueueOnClick</string>
+	<string name="preference_title_queue_on_click">Metti in coda al click</string>
+	<string name="preference_summary_queue_on_click">Dopo la selezione, accoda invece di eseguire.</string>
+
+	<!--	PREFER ARTIST SORTING    -->
+    <string name="preference_key_prefer_artist_sorting">mPreferArtistSorting</string>
+    <string name="preference_title_prefer_artist_sorting">Ordinamento per artista</string>
+    <string name="preference_summary_prefer_artist_sorting">Ordina gli album per artista invece che  per album.</string>
+
+	<!--	PREFERENCE CATEGORIES    -->
+    <string name="preference_category_general">Generali</string>
+    <string name="preference_category_sorting">Ordinamento</string>
+    <string name="preference_category_album_art">Copertina</string>
+    <string name="preference_category_other">Altro</string>
+    
+	<!--	EMBEDDED ALBUM ART ONLY    -->
+	<string name="preference_key_embedded_album_art">mUseAlwaysEmbeddedAlbumArt</string>
+    <string name="preference_title_embedded_album_art">Usa sempre copertina ID3</string>
+    <string name="preference_summary_embedded_album_art">Anche se a bassa risoluzione, verrà usata la copertina inclusa.</string>
+
+    <!--    SCROBBLING -->
+    <string name="preference_scrobble_list_key">scrobbling</string>
+    <string name="preference_scrobble_list_title">Scrobbling Last.fm</string>
+    <string name="preference_scrobble_list_summary">Seziona lo scrobbler da usare</string>
+    
+    <string name="preference_scrobble_name_dont">Non fare scrobbling</string>
+    <string name="preference_scrobble_name_sls">Simple Last.fm Scrobbler</string>
+    <string name="preference_scrobble_name_sd">Scrobble Droid</string>
+    <string name="preference_scrobble_value_dont">no</string>
+    <string name="preference_scrobble_value_sls">sls</string>
+    <string name="preference_scrobble_value_sd">sd</string>
+    
+	<!--	CLEAR ALBUM ART    -->
+	<string name="preference_key_clear_album_art">clearAlbumArtKey</string>
+    <string name="preference_title_clear_album_art">Cancella copertine</string>
+    <string name="preference_summary_clear_album_art">Da usare se la copertina è assegnata all\'artista/album errato</string>
+    <string name="preference_dialog_title_clear_album_art">Cancella copertine</string>
+    <string name="preference_dialog_message_clear_album_art">Da usare se le copertine sono assegnate agli artisti/album errati. Verrà cancellato il contenuto della cartella /sdcard/albumthumbs/RockOnNg. Non dimenticare di usare la voce \'Scarica Copertine\' dopo questa operazione.</string>
+    <string name="preference_dialog_positive_text_clear_album_art">Fallo!</string>
+    <string name="preference_dialog_negative_text_clear_album_art">Lascia stare... Le copertine vanno bene così.</string>
+    
+	<!--	DONATE    -->
+    <string name="preference_key_donate">donate</string>
+    <string name="preference_title_donate">Dona</string>
+    
+	<!--	ADDITIONAL PREFERENCE CATEGORIES    -->
+    <string name="preference_category_storage">Archiviazione</string>
+    
+    <!--	STORAGE TYPE    -->
+    <string name="preference_key_storage_type">mStorageType</string>
+    <string name="preference_title_storage_type"></string>
+    <string name="preference_title_storage_type_internal">Interna</string>
+    <string name="preference_title_storage_type_external">Esterna</string>
+    <string name="preference_summary_storage_type"></string>
+    <string name="preference_storage_free">liberi</string>
+    <string name="preference_storage_dialog_title">Tipo di archiviazione</string>
+    <string name="preference_storage_media_not_mounted">Periferica non montata.</string>
+    
+    <!--	DIRECTORY FILTER    -->
+    <string name="preference_key_directory_filter">mDirectoryFilter</string>
+    <string name="preference_title_directory_filter">Filtro cartelle</string>
+    <string name="preference_summary_directory_filter">Seleziona le cartelle che contengono musica.</string>
+</resources>

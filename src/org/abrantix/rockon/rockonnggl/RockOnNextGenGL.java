@@ -283,8 +283,9 @@ public class RockOnNextGenGL extends Activity {
         /**
          * Donation
          */
-        showDonation(false);
-        showRzPromo();
+//        showDonation(false);
+////        showRzPromo();
+//        showParaPromo();
     }
     
     /** OnResume */
@@ -834,6 +835,34 @@ public class RockOnNextGenGL extends Activity {
     	}
     }
     
+    private void showParaPromo() {
+    	boolean hasDonated = 
+			PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).
+				getBoolean(Constants.prefkey_mAppHasDonated, false);
+    	
+    	if(!hasDonated && !hasDonationApps()) {
+	    	int appCreateCount = 
+	    		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.getInt(Constants.prefkey_mAppCreateCount, 1);
+	    	boolean hasShown = 
+	    		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.getBoolean("shownParaPromo", false);
+	    	boolean neverShowAgain = 
+	    		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.getBoolean("neverShowParaPromo", false);
+    		
+	    	if(!hasShown) {
+	    		showParaDlg();
+	    		PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.edit().putBoolean("shownParaPromo", true)
+	    		.commit();
+	    	} else if(!neverShowAgain && appCreateCount%20 == 0) {
+	    		Log.i(TAG, "NOT CANCELED AND "+appCreateCount%10+" "+appCreateCount);
+	    		showParaDlg();
+	    	}
+    	}
+    }
+    
     static private void openRZInMarket(Context ctx) {
         Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.wecamefrommars.returnzero.beta"));
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -877,6 +906,55 @@ public class RockOnNextGenGL extends Activity {
     	if(mService != null) {
     		try {
 				mService.trackPage(Constants.ANALYTICS_RZ_PROMO);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+    	}
+    }
+    
+    static private void openParaInMarket(Context ctx) {
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.wecamefrommars.parashoot.lite"));
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ctx.startActivity(i);
+    }
+    
+    private void showParaDlg() {
+    	View v = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.para_promo_dialog, null);
+    	v.findViewById(R.id.para_dlg_img).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openParaInMarket(getApplicationContext());
+			}
+		});
+//    	v.findViewById(R.id.never_again).setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//			}
+//		});
+    	((CheckBox)v.findViewById(R.id.never_again_check)).setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+	    		.edit().putBoolean("neverShowParaPromo", isChecked)
+	    		.commit();
+			}
+		});
+    	
+    	AlertDialog.Builder adb = new AlertDialog.Builder(RockOnNextGenGL.this)
+    		.setTitle(R.string.para_dlg_title)
+    		.setView(v)
+    		.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					openParaInMarket(getApplicationContext());
+				}
+			})
+			.setNegativeButton(getString(R.string.playlist_dialog_cancel), null);
+    	adb.show();
+    	
+    	if(mService != null) {
+    		try {
+				mService.trackPage(Constants.ANALYTICS_PARA_PROMO);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}

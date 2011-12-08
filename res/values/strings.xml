@@ -6,6 +6,10 @@
 	<string name="rz_intro">Hi there! As you may have noticed, I have been quiet for a while... the main cause for that was that I\'ve been awfully busy developing a new game for Android -- which turned out a pretty cool tunnel racer called \'Return Zero\'. Feel free to check it out on the Market!</string>
 	<string name="rz_never_again">Don\'t show again.</string>
 	
+	<!-- 	PARA STUFF -->
+	<string name="para_dlg_title">Parashoot!</string>
+	<string name="para_intro">Hi there! As you may have noticed, I have been quiet for a while... the main cause for that was that I\'ve been awfully busy developing a few games for Android -- the latest one is called \'Parashoot\' and is a remake of the \'80s classics Paratroopers/Sabotage. Feel free to check it out on the Market!</string>
+	
 	<!--	BROWSING CATEGORIES-->
 	<string name="browse_cat_album">Albums</string>
 	<string name="browse_cat_artists">Artists</string>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="menu_option_title_get_art">
+		Copertine
+	</string>
+	<string name="menu_option_title_preferences">
+		Impostazioni
+	</string>
+	<string name="menu_option_title_playlist_id">
+		Liste di riproduzione
+	</string>
+	<string name="menu_option_title_concerts">
+		Concerti
+	</string>
+	<string name="menu_option_title_releases">
+		Nuovi Album
+	</string>
+	<string name="menu_option_title_view_mode">
+		Modo di Visualizzione
+	</string>
+	<string name="menu_option_title_theme">
+		Tema
+	</string>
+	<string name="menu_option_title_equalizer">
+		Equalizzatore
+	</string>
+</resources>
+

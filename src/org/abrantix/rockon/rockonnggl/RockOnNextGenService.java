@@ -1422,11 +1422,41 @@ public class RockOnNextGenService extends Service {
                 }
                 views.setTextViewText(
                 		R.id.artistalbum, 
-                		artist+"\n"+album);
+                		artist+" - "+album);
+//                views.setTextViewText(
+//                		R.id.artistalbum, 
+//                		artist+"\n"+album);
 //                views.setTextViewText(R.id.artistalbum,
 //                        getString(R.string.notification_artist_album, artist, album)
 //                        );
             }
+            
+//            RemoteViews views = new RemoteViews(getPackageName(), android.R.layout.statusbar_latest_event);
+////            views.setImageViewResource(R.id.icon, android.R.drawable.stat_notify_m);
+//            views.setImageViewResource(R.id.icon, R.drawable.stat_notify_musicplayer);
+//            if (getAudioId() < 0) {
+//                // streaming
+//                views.setTextViewText(R.id.trackname, getPath());
+//                views.setTextViewText(R.id.artistalbum, null);
+//            } else {
+//                String artist = getArtistName();
+//                views.setTextViewText(R.id.trackname, getTrackName());
+////                if (artist == null || artist.equals(MediaFile.UNKNOWN_STRING)) {
+//               	if (artist == null) {
+//                    artist = getString(R.string.unknown_artist_name);
+//                }
+//                String album = getAlbumName();
+////                if (album == null || album.equals(MediaFile.UNKNOWN_STRING)) {
+//                if (album == null) {
+//                    album = getString(R.string.unknown_album_name);
+//                }
+//                views.setTextViewText(
+//                		R.id.artistalbum, 
+//                		artist+"\n"+album);
+////                views.setTextViewText(R.id.artistalbum,
+////                        getString(R.string.notification_artist_album, artist, album)
+////                        );
+//            }
             
             Notification status = new Notification();
             status.contentView = views;

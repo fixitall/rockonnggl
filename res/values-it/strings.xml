@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- 	RZ STUFF -->
+	<string name="rz_dlg_title">Return Zero</string>
+	<string name="rz_intro">Ehilà! Come avrai notato, non mi faccio vivo da un po\'... il motivo principale è stato che sono stato estremamente impegnato nello sviluppo di un nuovo gioco per Android -- che è diventato un fighissimo gioco di corsa in galleria chiamato \'Return Zero\'. Sentiti libero di provarlo sul Market!</string>
+	<string name="rz_never_again">Non mostrare più.</string>
+	
+	<!--	BROWSING CATEGORIES-->
+	<string name="browse_cat_album">Album</string>
+	<string name="browse_cat_artists">Artisti</string>
+	<string name="browse_cat_songs">Tracce</string>
+	
+	<!--	GENERAL STUFF -->
+	<string name="album">Album</string>
+	<string name="albums">Album</string>
+	
+	
+	<!--	INTRO SCREEN-->
+    <string name="intro_text_1">Rock</string>
+    <string name="intro_text_2">On</string>
+    <string name="intro_text_3">NextGen</string>
+    <string name="app_name">³</string>
+    
+	<!--    ALBUM ART MESSAGES-->
+	<string name="get_art_dialog_title">³ Copertine</string>
+	<string name="get_art_dialog_message">
+		³ può recuperare le copertine mancanti da Internet. Vuoi farlo adesso? (Ci vorrà ~1 min ogni 10 album ed è raccomandata una connessione Wifi).
+	</string>
+	<string name="get_art_dialog_yes">Sì!</string>
+	<string name="get_art_dialog_no">Lo farò dopo.</string>
+	
+	<!--	ART DOWNLOAD MESSAGES-->
+	<string name="art_download_no_inet">Connessione internet non disponibile!</string>
+	<string name="art_download_progress_title">Scaricamento Copertine</string>
+	<string name="art_download_cancel">Annulla</string>
+	<string name="art_download_progress_initial_message">Ricerca copertine...</string>
+	
+	<!--	NO SDCARD MESSAGES -->
+	<string name="no_sd_card_dialog_title">Nessuna scheda SD!</string>
+	<string name="no_sd_card_dialog_message">Prego inserisci una scheda SD...</string>
+	<string name="no_sd_card_dialog_continue_anyway">Continua comunque</string>
+	<string name="no_sd_card_dialog_exit">Esci</string>
+	<!--	NO MUSIC MESSAGES -->
+	<string name="no_music_dialog_title">Non ci sono tracce in questa lista di riproduzione!</string>
+	<string name="no_music_dialog_message">Impossibile trovare musica sulla SD per la lista di riproduzione selezionata, sei pregato di riavviare l\'applicazione o di cambiare la lista di riproduzione...</string>
+	<string name="no_music_dialog_continue_anyway">Continua comunque</string>
+	<string name="no_music_dialog_exit">Esci</string>
+	
+	<!--	DOWNLOAD CONCERTS APP MESSAGES-->
+	<string name="concert_app_install_dialog_title">Installa Concerts³</string>
+	<string name="concert_app_install_dialog_message">Questa caratteristica richiede l\'installazione di Concerts³. Vuoi procedere?</string>
+	<string name="concert_app_install_dialog_ok">Sì</string>
+	<string name="concert_app_install_dialog_cancel">No. Lasciami in pace!</string>
+	<string name="concert_app_install_no_market_app_msg">Ooops! A quanto pare non c\'è nessuna applicazione Market installata.</string>
+	
+	<!--	DOWNLOAD RELEASES APP MESSAGES-->
+	<string name="releases_app_install_dialog_title">Installa Releases³</string>
+	<string name="releases_app_install_dialog_message">Questa carattestica richiede l\'installazione di Releases³. Vuoi procedere?</string>
+	<string name="releases_app_install_dialog_ok">Sì</string>
+	<string name="releases_app_install_dialog_cancel">No. Lasciami in pace!</string>
+	<string name="releases_app_install_no_market_app_msg">Ooops! A quanto pare non c\'è nessuna applicazione Market installata.</string>
+	
+	<!--	TOASTER MESSAGES	-->
+	<string name="song_added_to_playlist">Traccia accodata</string>
+	<string name="song_removed_from_playlist">Traccia rimossa</string>
+	<string name="album_art_changed">Copertina modificata</string>
+	<string name="playlist_empty_toast">Errore! La lista di riproduzione è vuota!</string>
+	<string name="playqueue_empty_toast">La coda è vuota!</string>
+	<string name="not_an_album_toast">Mi spiace, questo è un artista, non un album!</string>
+	<string name="playlist_queued_toast">Lista di riproduzione accodata</string>
+	<string name="generic_error_toast">Errore!</string>
+	<string name="playlist_deleted_toast">Lista di riproduzione cancellata!</string>
+	<string name="song_deleted_toast">Traccia eliminata!</string>
+	
+	<!-- 	SEARCH -->
+	<string name="search_hint">Titolo della canzone o nome dell\'artista</string>
+	
+	<!--	PLAY QUEUE	-->
+	<string name="play_queue_title">Coda di Riproduzione</string>
+	<string name="clear_playlist_dialog_option">Pulisci</string>
+	<string name="create_playlist_dialog_option">Salva</string>
+	
+	<!--	SONG LISTS MORE RESULTS -->
+	<string name="song_list_more_results">canzoni...</string>
+	
+	<!--	CREATE PLAYLIST DIALOG -->
+	<string name="create_playlist_dialog_title">Selezione il Nome della Lista</string>
+	<string name="create_playlist_dialog_save_option">Salva</string>
+	<string name="create_playlist_dialog_text_hint">Digita il nome della lista di riproduzione...</string>
+	
+	<!--	DELETE SONG DIALOG	-->
+	<string name="song_delete_confirm_title">Cancella traccia</string>
+	<string name="song_delete_message">Sei sicuro di voler cancellare questa traccia? L\'operazione non può essere annullata.</string>
+	<string name="song_delete_positive_button">Sì!</string>
+	<string name="song_delete_negative_button">No.</string>
+	
+	<!--	DELETE PLAYLIST DIALOG	-->
+	<string name="playlist_delete_confirm_title">Cancella lista</string>
+	<string name="playlist_delete_message">Sei sicuro di voler cancellare la lista di riproduzione?</string>
+	<string name="playlist_delete_positive_button">Sì!</string>
+	<string name="playlist_delete_negative_button">No.</string>
+	
+	<!--	CREATE PLAYLIST TOASTER	-->
+	<string name="create_playlist_toaster_added_part_1">Tracce aggiunte alla lista di riproduzione</string>
+	<string name="create_playlist_toaster_failed">Errore nella creazione della lista di riproduzione!</string>
+	<string name="create_playlist_toaster_name_required">Il nome della lista di riproduzione è necessario...</string>
+	
+	<!--	-->
+	
+	<!--	ALBUM SONG LIST DIALOG -->
+	<string name="album_song_list_play_all">Riproduci tutto</string>
+	<string name="album_song_list_queue_all">Accoda tutto</string>
+	
+	<!--	SONG OPTIONS DIALOG	-->
+	<string name="song_option_play_now">Riproduci adesso</string>
+	<string name="song_option_add_to_queue">Accoda</string>
+	<string name="song_option_delete">Elimina</string>
+	
+	<!--	PLAYLIST OPTIONS DIALOG	-->
+	<string name="playlist_option_play_now">Riproduci adesso</string>
+	<string name="playlist_option_add_to_queue">Accoda</string>
+	<string name="playlist_option_delete">Elimina</string>
+	
+	<!--	PLAYLIST DIALOG		-->
+	<string name="playlist_dialog_title">Seleziona lista di riproduzione</string>
+	<string name="playlist_dialog_cancel">Annulla</string>
+	<string name="playlist_all_title">Riproduci tutte</string>
+	<string name="playlist_most_recent_title">Recenti</string>
+	<string name="playlist_most_played_title">Riprodotte più spesso</string>
+	
+	<!-- 	VIEW MODES DIALOG -->
+	<string name="view_mode_cube">³</string>
+	<string name="view_mode_wall">Parete</string>
+	<string name="view_mode_boring">Noioso</string>
+	<string name="view_mode_morph">Flusso</string>
+	
+	<!-- 	THEMES DIALOG -->
+	<string name="theme_normal">Normale</string>
+	<string name="theme_halftone">Mezzitoni</string>
+	<string name="theme_earthquake">Terremoto</string>
+	
+	<!--	THEME PROCESSING MESSAGES	-->
+	<string name="art_processing_progress_title">Elaborazione Copertine</string>
+	<string name="art_processing_cancel">Annulla</string>
+	<string name="art_processing_go_background">Continua in secondo piano</string>
+	<string name="art_processing_progress_initial_message">Ricerca copertine...</string>
+	
+	<!--    HALF TONE DIALOG -->
+	<string name="half_tone_dialog_title">Tema Mezzitoni</string>
+	<string name="half_tone_dialog_message">
+		Questo tema richiede che le tue copertine vengano processate. Si tratta di un\'operazione pesante per la CPU e potrebbe volerci del tempo (~1 min ogni 30 album).
+	</string>
+	<string name="half_tone_dialog_yes">Fallo!</string>
+	<string name="half_tone_dialog_no">Sembra complicato. Mi tiro fuori!</string>
+	
+	<!--    EARTHQUAKE DIALOG -->
+	<string name="earthquake_dialog_title">Earthquake Theme</string>
+	<string name="earthquake_dialog_message">
+		Questo tema richiede che le tue copertine vengano processate. Ma non ti preoccupare, è una cosa veloce (10 secondi ogni 100 albums).
+	</string>
+	<string name="earthquake_dialog_yes">Fallo!</string>
+	<string name="earthquake_dialog_no">Mi sa che è un problema. Lasciamo perdere!</string>
+	
+	
+	<!--	ACTIVITY INTENTS (some of them)-->
+	<string name="main_activity_intent">org.abrantix.rockon.rockonnggl.RockOnNextGenGL</string>
+	
+	<!--	NOTIFICATION STRINGS -->
+	<string name="unknown_album_name">Album Sconosciuto</string>
+	<string name="unknown_artist_name">Artista Sconosciuto</string>
+	
+	<!-- 	MANUAL ALBUM ART MSGS -->
+	<string name="manual_albumart_error">Errore</string>
+	<string name="manual_albumart_no_album_specified">Nessun album specificato!</string>
+	<string name="manual_albumart_source">Fonte</string>
+	<string name="manual_albumart_source_local">locale</string>
+	<string name="manual_albumart_source_internet">internet</string>
+	<string name="manual_albumart_resolution_loading">caricamento...</string>
+	<string name="manual_albumart_resolution_unavailable">non disponibile</string>
+	
+	<string name="manual_input_enable">Ricerca manuale</string>
+	<string name="manual_input_artist">Artista</string>
+	<string name="manual_input_album">Album</string>
+	
+	<!--	DONATE MSG	-->
+	<string name="donate_title">Dona</string>
+	<string name="donate_msg">³ è un lettore musicale gratuito e open source scritto interamente durante il mio tempo libero. Se lo apprezzi, sii gentile, considera una donazione per supportare l\'ulteriore sviluppo di ³. Puoi farlo seguendo una tra queste opzioni:</string>
+	<string name="donate_using">Dona attraverso</string>
+	<string name="donate_back_to_app">Torna indietro a</string>
+	
+	<!--	UNLOCK SCREEN	-->
+	<string name="unlock_screen">Sblocca</string>
+	
+	<!--	WIDGET STRINGS	-->
+	<string name="widget_app_start">Avvia ³</string>
+	
+	<!--	BUG REPORTS	-->
+	<string name="bug_report_intro_part_one">Mi spiace!\n\n3 (Cubed) v</string>
+	<string name="bug_report_intro_part_two">è andato in crash! Perfavore, invia questa email, così che possiamo analizzare/risolvere il problema.\n</string>
+	
+<!--	<string name="bug_report_intro">-->
+<!--		"Sorry!\n\nRockOn v\"-->
+<!--		<xliff:g id="APP_VERSION">%s</xliff:g>-->
+<!--		\" crashed! Please send this mail, so that we can analyze/fix the issue.\n"-->
+<!--	</string>-->
+
+	<!--	DIRECTORY FILTER	-->
+	<string name="directories_on_sdcard">La tua scheda SD contiene le seguenti cartelle:</string>
+	<string name="select_all">Seleziona tutto</string>
+	<string name="unselect_all">Deseleziona tutto</string>
+
+	<!--	GENERIC STUFF -->
+	<string name="ok">Ok</string>
+	<string name="back">Indietro</string>
+	<string name="all">Tutto</string>
+	<string name="none">Niente</string>
+	<string name="on">Attiva</string>
+	<string name="off">Disattiva</string>
+	
+	<string name="genre_prefix">Genere:</string>
+
+</resources>

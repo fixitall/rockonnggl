@@ -25,7 +25,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 
-public class NavItemUtils{
+public class NavItemUtilsBackup{
 	final String TAG = "AlbumNavItemUtils";
 	
 	
@@ -37,7 +37,7 @@ public class NavItemUtils{
 	String	albumStringSingular;
 	String	albumStringPlural;
 	File	albumCoverFile;
-	BiDiCanvas 	canvas;
+	Canvas 	canvas;
 	RectF	labelRectf;
 	Paint	labelBgPaint;
 	Paint	labelAlbumPaint;
@@ -45,12 +45,12 @@ public class NavItemUtils{
 	Paint	labelAlbumBoringPaint;
 	Paint	labelArtistBoringPaint;
 	
-	public NavItemUtils(int width, int height, Context ctx) 
+	public NavItemUtilsBackup(int width, int height, Context ctx) 
 	{
 		albumStringSingular = ctx.getString(R.string.album);
 		albumStringPlural = ctx.getString(R.string.albums);
 		
-		canvas = new BiDiCanvas();
+		canvas = new Canvas();
 		labelRectf = new RectF(0,0,width,height/4);
 		
 		labelBgPaint = new Paint();
@@ -334,21 +334,32 @@ public class NavItemUtils{
     	labelAlbumPaint.setTextSize(.28f * height);
     	labelArtistPaint.setTextSize(.24f * height);
     	if(albumNavItem.albumName != null){
-	    	canvas.drawBiDiText(
-	    	        albumNavItem.albumName,
+	    	canvas.drawText(
+	    			albumNavItem.albumName.substring(
+	    					0, 
+	    					labelAlbumPaint.breakText(
+	    							albumNavItem.albumName, 
+	    							false, 
+	    							width*0.95f, 
+	    							null)), 
 	    			.5f * width, 
 	    			.5f * height,
-	    			width*0.95f,
 	    			labelAlbumPaint);
     	}
     	if(albumNavItem.artistName != null){
-	    	canvas.drawBiDiText(
-	    	        albumNavItem.artistName,
+	    	canvas.drawText(
+	    			albumNavItem.artistName.substring(
+	    					0, 
+	    					labelArtistPaint.breakText(
+	    							albumNavItem.artistName, 
+	    							false, 
+	    							width*.95f, 
+	    							null)),
 					.5f * width, 
 					.9f * height, 
-                    width*.95f, 
 					labelArtistPaint);
     	}
+    	
 		return true;
 	}
 	
@@ -378,21 +389,32 @@ public class NavItemUtils{
     	labelAlbumBoringPaint.setTextSize(.24f * height);
     	labelArtistBoringPaint.setTextSize(.48f * height);
     	if(albumNavItem.artistName != null){
-    	    canvas.drawBiDiText(
-    	            albumNavItem.artistName,
-    	            0.f,
-    	            .5f * height,
-    	            width*.95f,
-    	            labelArtistBoringPaint);
+	    	canvas.drawText(
+	    			albumNavItem.artistName.substring(
+	    					0, 
+	    					labelArtistBoringPaint.breakText(
+	    							albumNavItem.artistName, 
+	    							false, 
+	    							width*.95f, 
+	    							null)),
+					0.f * width, 
+					.5f * height, 
+					labelArtistBoringPaint);
     	}
     	if(albumNavItem.albumName != null){
-            canvas.drawBiDiText(
-                    albumNavItem.albumName,
-                    0.f,
-                    .9f * height,
-                    width*.95f,
-                    labelAlbumBoringPaint);
+	    	canvas.drawText(
+	    			albumNavItem.albumName.substring(
+	    					0, 
+	    					labelAlbumBoringPaint.breakText(
+	    							albumNavItem.albumName, 
+	    							false, 
+	    							width*0.95f, 
+	    							null)), 
+	    			0.f * width, 
+	    			.9f * height,
+	    			labelAlbumBoringPaint);
     	}
+
 		return true;
 	}
 	
@@ -425,19 +447,29 @@ public class NavItemUtils{
 	    	labelAlbumBoringPaint.setTextSize(.24f * height); // will use for artist Name
 	    	labelArtistBoringPaint.setTextSize(.48f * height); // will use for song name
 	    	if(albumNavItem.songName != null){
-		    	canvas.drawBiDiText(
-		    	        albumNavItem.songName,
+		    	canvas.drawText(
+		    			albumNavItem.songName.substring(
+		    					0, 
+		    					labelArtistBoringPaint.breakText(
+		    							albumNavItem.songName, 
+		    							false, 
+		    							width*.95f, 
+		    							null)),
 						0.f * width, 
-						.5f * height,
-                        width*.95f, 
+						.5f * height, 
 						labelArtistBoringPaint);
 	    	}
 	    	if(albumNavItem.artistName != null){
-		    	canvas.drawBiDiText(
-		    	        albumNavItem.artistName,
+		    	canvas.drawText(
+		    			albumNavItem.artistName.substring(
+		    					0, 
+		    					labelAlbumBoringPaint.breakText(
+		    							albumNavItem.artistName, 
+		    							false, 
+		    							width*0.95f, 
+		    							null)), 
 		    			0.f * width, 
 		    			.9f * height,
-                        width*0.95f, 
 		    			labelAlbumBoringPaint);
 	    	}
 			return true;
@@ -446,6 +478,7 @@ public class NavItemUtils{
     	{
     		return false;
     	}
+
 	}
 	
 	
@@ -479,11 +512,16 @@ public class NavItemUtils{
     	labelAlbumBoringPaint.setTextSize(.24f * height);
     	labelArtistBoringPaint.setTextSize(.48f * height);
     	if(artistNavItem.artistName != null){
-	    	canvas.drawBiDiText(
-	    	        artistNavItem.artistName,
+	    	canvas.drawText(
+	    			artistNavItem.artistName.substring(
+	    					0, 
+	    					labelAlbumBoringPaint.breakText(
+	    							artistNavItem.artistName, 
+	    							false, 
+	    							width*0.95f, 
+	    							null)), 
 					0.f * width, 
 					.5f * height, 
-                    width*0.95f, 
 					labelArtistBoringPaint);
     	}
     	if(artistNavItem.nAlbumsFromArtist > 0){
@@ -497,6 +535,8 @@ public class NavItemUtils{
 	    			.9f * height,
 	    			labelAlbumBoringPaint);
     	}
+
+
 		return true;
 	}
 	
@@ -793,11 +833,16 @@ public class NavItemUtils{
     	labelAlbumPaint.setTextSize(.28f * height); // will use it for Artist Name
     	labelArtistPaint.setTextSize(.24f * height); // will use it for album count
     	if(navItem.artistName != null){
-	    	canvas.drawBiDiText(
-	    	        navItem.artistName,
+	    	canvas.drawText(
+	    			navItem.artistName.substring(
+	    					0, 
+	    					labelAlbumPaint.breakText(
+	    							navItem.artistName, 
+	    							false, 
+	    							width*0.95f, 
+	    							null)), 
 	    			.5f * width, 
 	    			.5f * height,
-                    width*0.95f, 
 	    			labelAlbumPaint);
     	}
 //    	if(navItem.nAlbumsFromArtist > 0){

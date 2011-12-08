@@ -438,6 +438,7 @@ public class Constants{
 	static final String ANALYTICS_PREFERENCES_PAGE = "/Preferences";
 	static final String ANALYTICS_EQUALIZER_PAGE = "/Equalizer";
 	static final String ANALYTICS_RZ_PROMO = "/RZPromo";
+	static final String ANALYTICS_PARA_PROMO = "/ParaPromo";
 	
 	/** Preference keys */ // could be set also in values/preference_strings.xml
 	static final String	prefkey_mBrowseCatMode = "mBrowseCatMode";

@@ -65,9 +65,16 @@ public class ManualAlbumArtActivity extends Activity{
     	startService(i);
     	bindService(i, mServiceConnection, BIND_AUTO_CREATE);
     	
-//    	setupAdsenseOrDonation();
-    	setupRzPromo();
+    	clearAllPromos();
+////    	setupAdsenseOrDonation();
+//    	setupRzPromo();
     }
+	
+	private void clearAllPromos() {
+		findViewById(R.id.donate_button).setVisibility(View.GONE);
+		findViewById(R.id.adview).setVisibility(View.GONE);
+		findViewById(R.id.rz_promo).setVisibility(View.GONE);
+	}
 	
 	private void setupRzPromo() {
 		findViewById(R.id.adview).setVisibility(View.GONE);
