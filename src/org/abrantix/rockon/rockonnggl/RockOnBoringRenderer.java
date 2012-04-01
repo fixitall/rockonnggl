@@ -115,18 +115,14 @@ public class RockOnBoringRenderer extends RockOnRenderer implements GLSurfaceVie
 
     private void initCacheVars(boolean force){
        	/** init dimensions */
-    	mBitmapWidth = 
-    		Constants.ALBUM_ART_TEXTURE_SIZE * 
-    		(int) Math.ceil((float)mWidth / (float)Constants.ALBUM_ART_TEXTURE_SIZE);
-    	mBitmapHeight = 
-    		Constants.ALBUM_ART_TEXTURE_SIZE * 
-    		(int) Math.ceil((float)mWidth / (float)Constants.ALBUM_ART_TEXTURE_SIZE);
+    	mBitmapWidth = Constants.getLabelSizeBoring(mContext);
+    	mBitmapHeight = Constants.getLabelSizeBoring(mContext);
 //    	mBitmapWidth = 
 //    		Constants.ALBUM_ART_TEXTURE_SIZE * 
-//    		(int) Math.ceil((float)mWidth / 320.f);
+//    		(int) Math.ceil((float)mWidth / (float)Constants.ALBUM_ART_TEXTURE_SIZE);
 //    	mBitmapHeight = 
 //    		Constants.ALBUM_ART_TEXTURE_SIZE * 
-//    		(int) Math.ceil((float)mWidth / 320.f);
+//    		(int) Math.ceil((float)mWidth / (float)Constants.ALBUM_ART_TEXTURE_SIZE);
     	
     	mTextRatio = 4;
    	

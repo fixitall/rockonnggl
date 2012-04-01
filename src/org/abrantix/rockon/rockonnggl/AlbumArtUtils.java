@@ -19,6 +19,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -216,20 +217,40 @@ public class AlbumArtUtils{
 		}
 	}
 	
-	static public boolean saveSmallAlbumCoverInSdCard(Bitmap bitmap, String albumKey){
+	public static boolean hasWrongPOTSize(Context ctx, String key) {
+		File file = new File(Constants.ROCKON_SMALL_ALBUM_ART_PATH+key);
+		int bmDim = Constants.getAlbumArtTextureSize(ctx);
+		Log.i(null, "xxx length: "+file.length()+" // expected: "+(bmDim * bmDim * 2));
+		if(file.length() > 0 && file.length() != bmDim * bmDim * 2 /* 5+6+5 bits for RGB565 */) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	static public boolean saveSmallAlbumCoverInSdCard(Context ctx, Bitmap bitmap, String albumKey){
 		try{
 			if(bitmap != null){
 				File file = new File(Constants.ROCKON_SMALL_ALBUM_ART_PATH+albumKey);
 				Log.i(TAG, file.getAbsolutePath());
-				if(!file.exists())
+				if(!file.exists()) {
+					if(!file.getParentFile().exists())
+						file.getParentFile().mkdirs();
 					file.createNewFile();
+				}
 				FileOutputStream fileOutStream = new FileOutputStream(file);
 				// TODO: decimation algorithm
 //				try{
+//					Bitmap	smallBitmap = Bitmap.createScaledBitmap(
+//							bitmap, 
+//							Constants.ALBUM_ART_TEXTURE_SIZE, 
+//							Constants.ALBUM_ART_TEXTURE_SIZE, 
+//							true);
 					Bitmap	smallBitmap = Bitmap.createScaledBitmap(
 							bitmap, 
-							Constants.ALBUM_ART_TEXTURE_SIZE, 
-							Constants.ALBUM_ART_TEXTURE_SIZE, 
+							Constants.getAlbumArtTextureSize(ctx), 
+							Constants.getAlbumArtTextureSize(ctx), 
 							true);
 					Bitmap smallBitmapPostProc = smallCoverPostProc(smallBitmap);
 					ByteBuffer bitmapBuffer = ByteBuffer.allocate(
@@ -251,7 +272,7 @@ public class AlbumArtUtils{
 	}
 	
 	static public boolean saveSmallUnknownAlbumCoverInSdCard(
-			Resources res,
+			Context ctx, 
 			byte[] colorComponent,
 			String path,
 			int theme)
@@ -264,18 +285,23 @@ public class AlbumArtUtils{
 			 */
 			Bitmap unknownBitmap = 
 				BitmapFactory.decodeResource(
-						res, 
+						ctx.getResources(), 
 						R.drawable.unknown_256);
 			saveSmallAlbumCoverInSdCard(
+					ctx,
 					unknownBitmap, 
 					Constants.ROCKON_UNKNOWN_ART_FILENAME);
 			/** */
 			
 			Bitmap	tmpBm = 
 				Bitmap.createBitmap(
-					Constants.ALBUM_ART_TEXTURE_SIZE, 
-					Constants.ALBUM_ART_TEXTURE_SIZE, 
-					Bitmap.Config.RGB_565);
+						Constants.getAlbumArtTextureSize(ctx), 
+						Constants.getAlbumArtTextureSize(ctx), 
+						Bitmap.Config.RGB_565);
+//				Bitmap.createBitmap(
+//					Constants.ALBUM_ART_TEXTURE_SIZE, 
+//					Constants.ALBUM_ART_TEXTURE_SIZE, 
+//					Bitmap.Config.RGB_565);
 			if(unknownBitmap != null){
 				processAndSaveSmallAlbumCoverInSdCard(
 						tmpBm,

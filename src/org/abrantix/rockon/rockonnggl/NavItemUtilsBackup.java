@@ -175,7 +175,7 @@ public class NavItemUtilsBackup{
 	 */
 	boolean fillAlbumUnknownBitmap(
 			NavItem albumNavItem,
-			Resources res,		
+			Context ctx,		
 			int width, 
 			int height, 
 			byte[] colorComponent,
@@ -225,7 +225,7 @@ public class NavItemUtilsBackup{
 			{
 //				Log.i(TAG, " - album cover bmp file has a problem "+path);
 				AlbumArtUtils.saveSmallUnknownAlbumCoverInSdCard(
-						res,
+						ctx,
 						colorComponent,
 						path,
 						theme);

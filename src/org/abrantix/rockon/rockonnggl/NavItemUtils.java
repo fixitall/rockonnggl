@@ -110,6 +110,8 @@ public class NavItemUtils{
 	    	if(albumNavItem.cover.getWidth() != width || 
 					albumNavItem.cover.getHeight() != height){
 				Log.i(TAG, " - reading pixels from file failed");
+				Log.i(TAG, albumNavItem.cover.getWidth()+" // "+width+" // "+
+						albumNavItem.cover.getHeight()+ " // "+height);
 	    		return false;
 	    	}
 	    	
@@ -175,7 +177,7 @@ public class NavItemUtils{
 	 */
 	boolean fillAlbumUnknownBitmap(
 			NavItem albumNavItem,
-			Resources res,		
+			Context ctx,		
 			int width, 
 			int height, 
 			byte[] colorComponent,
@@ -217,7 +219,8 @@ public class NavItemUtils{
 	    
 			/** Access the file */
 			albumCoverFile = new File(path);
-			if(albumCoverFile.exists() && albumCoverFile.length() > 0)
+			int dim = Constants.getAlbumArtTextureSize(ctx);
+			if(albumCoverFile.exists() && albumCoverFile.length() > 0 && albumCoverFile.length() == dim * dim * 2)
 			{
 				albumCoverPath = path;
 			} 
@@ -225,7 +228,7 @@ public class NavItemUtils{
 			{
 //				Log.i(TAG, " - album cover bmp file has a problem "+path);
 				AlbumArtUtils.saveSmallUnknownAlbumCoverInSdCard(
-						res,
+						ctx,
 						colorComponent,
 						path,
 						theme);

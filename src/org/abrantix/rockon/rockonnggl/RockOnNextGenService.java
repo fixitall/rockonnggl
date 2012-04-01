@@ -23,6 +23,7 @@ import android.database.sqlite.SQLiteException;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
@@ -318,7 +319,7 @@ public class RockOnNextGenService extends Service {
         // If the service was idle, but got killed before it stopped itself, the
         // system will relaunch it. Make sure it gets stopped again in that case.
         Message msg = mDelayedStopHandler.obtainMessage();
-        mDelayedStopHandler.sendMessageDelayed(msg, IDLE_DELAY);
+        mDelayedStopHandler.sendMessageDelayed(msg, IDLE_DELAY);        
     }
     
     @Override
@@ -772,7 +773,8 @@ public class RockOnNextGenService extends Service {
         }
         
         // No active playlist, OK to stop the service right now
-        setForeground(false);
+        if(Integer.valueOf(Build.VERSION.SDK) <= 14)
+        	setForeground(false);
         stopSelf(mServiceStartId);
         return true;
     }
@@ -857,7 +859,8 @@ public class RockOnNextGenService extends Service {
         } catch(Exception e){
         	e.printStackTrace();
         	// XXX - deprecated
-        	setForeground(false);
+            if(Integer.valueOf(Build.VERSION.SDK) <= 14)
+            	setForeground(false);
         }
     }
     
@@ -1513,7 +1516,8 @@ public class RockOnNextGenService extends Service {
         } catch(Exception e){
         	e.printStackTrace();
         	// XXX - deprecated
-        	setForeground(true);
+            if(Integer.valueOf(Build.VERSION.SDK) <= 14)
+            	setForeground(true);
         	NotificationManager notificationManager = (NotificationManager) 
         		getSystemService(Context.NOTIFICATION_SERVICE);
         	notificationManager.notify(Constants.PLAY_NOTIFICATION_ID, notification);	

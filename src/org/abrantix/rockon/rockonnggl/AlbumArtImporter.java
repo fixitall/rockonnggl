@@ -140,18 +140,14 @@ public class AlbumArtImporter{
     				albumName);
     		
     		/** do we want the embedded even if it is low res? */
-    		boolean	useAlwaysEmbedded = 
-    			PreferenceManager.getDefaultSharedPreferences(mContext).
-        			getBoolean(
-        					mContext.getString(
-        							R.string.preference_key_embedded_album_art), 
-        					true);
+    		boolean	useAlwaysEmbedded = PreferenceManager.getDefaultSharedPreferences(mContext)
+    				.getBoolean(mContext.getString(R.string.preference_key_embedded_album_art),true);
     		
-    		int		artSize = 
-    			AlbumArtUtils.getImageSize(
-        				AlbumArtUtils.getAlbumArtPath(
-        	    				embeddedArtPath, 
-        	    				RockOnFileUtils.validateFileName(albumId.toString())));
+    		String artPath = AlbumArtUtils.getAlbumArtPath(
+					embeddedArtPath, 
+					RockOnFileUtils.validateFileName(albumId.toString()));
+    		
+    		int	artSize = AlbumArtUtils.getImageSize(artPath);
     		
     		/** check if image (embedded or downloaded) exists and is big enough */
     		if(
@@ -168,7 +164,7 @@ public class AlbumArtImporter{
 	    						artSize <= 0
 	    				)
 	    			)
-    			)
+    		)
     		{
     			if(!artistName.equals("<unknown>")){
 	        		/** try to fetch it from freecovers.net */
@@ -201,23 +197,36 @@ public class AlbumArtImporter{
     		/** check if small image exists */
     		// TODO: dont always recreate the small art
     		
+    		if(embeddedArtPath != null) embeddedArt = BitmapFactory.decodeFile(embeddedArtPath);
+    		
     		/** create small art */
     		if(internetArt != null)
     		{ // fresh art download
     			AlbumArtUtils.saveSmallAlbumCoverInSdCard(
+    					mContext,
     					internetArt, 
     					RockOnFileUtils.validateFileName(albumId.toString()));
     			internetArt.recycle();
-    		} else if(embeddedArtPath != null){
-    			embeddedArt = BitmapFactory.decodeFile(embeddedArtPath);
-    			if(embeddedArt != null)
-    			{
-    				AlbumArtUtils.saveSmallAlbumCoverInSdCard(
+    		} else if(embeddedArtPath != null && embeddedArt != null){
+				Log.i(null, " + + EMBEDDED ART IS NOT NULL");
+    			AlbumArtUtils.saveSmallAlbumCoverInSdCard(
+    						mContext,
     						embeddedArt, 
     						RockOnFileUtils.validateFileName(albumId.toString()));
-    				embeddedArt.recycle();
-    			} else {
-    				// TODO ::::::: --- needs treatment
+    			embeddedArt.recycle();
+    		} else if(artPath != null) {
+    			if(AlbumArtUtils.hasWrongPOTSize(
+    					mContext,
+    					RockOnFileUtils.validateFileName(albumId.toString()))) 
+    			{
+    				Bitmap bm = BitmapFactory.decodeFile(artPath);
+    				if(bm != null) {
+    					AlbumArtUtils.saveSmallAlbumCoverInSdCard(
+    						mContext,
+    						bm, 
+    						RockOnFileUtils.validateFileName(albumId.toString()));
+    					bm.recycle();
+    				}
     			}
     		}
     	}

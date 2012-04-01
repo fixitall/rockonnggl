@@ -136,19 +136,29 @@ public class RockOnNextGenAppWidgetProvider4x4 extends AppWidgetProvider {
         final Resources res = service.getResources();
         final RemoteViews views = new RemoteViews(service.getPackageName(), R.layout.album_appwidget_4x4);
         
+        String artistName = String.valueOf(service.getArtistName());
+        String trackName = String.valueOf(service.getTrackName()); 
+        
         /* Set the right album cover */
         Bitmap wickedCover = 
         	WidgetCoverUtils.getWidgetCoverBitmap(
 				String.valueOf(service.getAlbumId()),
-				String.valueOf(service.getArtistName()),
-				String.valueOf(service.getTrackName()),
-				Constants.REASONABLE_ALBUM_ART_SIZE,
-				Constants.REASONABLE_ALBUM_ART_SIZE);
+				artistName,
+				trackName,
+				Constants.getAlbumArtTextureSize(service.getApplicationContext()),
+				Constants.getAlbumArtTextureSize(service.getApplicationContext()));
+//				Constants.REASONABLE_ALBUM_ART_SIZE,
+//				Constants.REASONABLE_ALBUM_ART_SIZE);
         if(wickedCover != null){
         	views.setImageViewBitmap(
         			R.id.widget_album_cover, 
         			wickedCover);
         }
+        
+        views.setTextViewText(R.id.widget_artist_name, artistName);
+        views.setTextViewText(R.id.widget_track_name, trackName);
+        
+        
         
 //        CharSequence titleName = service.getTrackName();
 //        CharSequence artistName = service.getArtistName();
@@ -202,7 +212,7 @@ public class RockOnNextGenAppWidgetProvider4x4 extends AppWidgetProvider {
         } else {
         	views.setImageViewResource(R.id.control_repeat, R.drawable.repeat_all_selector);
         }
-
+        
         // Link actions buttons to intents
         linkButtons(service, views, mPlaying, mShuffleMode, mRepeatMode);
         

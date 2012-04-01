@@ -122,8 +122,10 @@ public class RockOnWallRenderer extends RockOnRenderer implements GLSurfaceView.
     	}
     	
     	/** init dimensions */
-    	mBitmapWidth = Constants.ALBUM_ART_TEXTURE_SIZE;
-    	mBitmapHeight = Constants.ALBUM_ART_TEXTURE_SIZE;
+    	mBitmapWidth = Constants.getAlbumArtTextureSize(mContext);
+    	mBitmapHeight = Constants.getAlbumArtTextureSize(mContext);
+//    	mBitmapWidth = Constants.ALBUM_ART_TEXTURE_SIZE;
+//    	mBitmapHeight = Constants.ALBUM_ART_TEXTURE_SIZE;
     	
     	/** albumNavUtils */
     	mNavItemUtils = new NavItemUtils(mBitmapWidth, mBitmapHeight, mContext);
@@ -144,6 +146,11 @@ public class RockOnWallRenderer extends RockOnRenderer implements GLSurfaceView.
     	}
     	mColorComponentBuffer = new byte[4*mBitmapWidth*mBitmapHeight];
     	
+    	undefined = Bitmap.createBitmap(
+    				mBitmapWidth, 
+    				mBitmapHeight, 
+    				Bitmap.Config.RGB_565);
+    	    
     }
 
     public	Cursor getAlbumCursor(){
@@ -693,10 +700,7 @@ public class RockOnWallRenderer extends RockOnRenderer implements GLSurfaceView.
     	return changed;
     }
     
-    Bitmap undefined = Bitmap.createBitmap(
-			Constants.REASONABLE_ALBUM_ART_SIZE, 
-			Constants.REASONABLE_ALBUM_ART_SIZE, 
-			Bitmap.Config.RGB_565);
+    Bitmap undefined = null;
     
     /* optimization */
     int 			cacheIdxTmp;
@@ -770,9 +774,11 @@ public class RockOnWallRenderer extends RockOnRenderer implements GLSurfaceView.
 			    			{
 				    			mNavItemUtils.fillAlbumUnknownBitmap(
 				    					mNavItem[cacheIndex], 
-				    					mContext.getResources(), 
-				    					mNavItem[cacheIndex].cover.getWidth(), 
-				    					mNavItem[cacheIndex].cover.getHeight(), 
+				    					mContext,
+				    					mBitmapWidth,
+				    					mBitmapHeight,
+//				    					mNavItem[cacheIndex].cover.getWidth(), 
+//				    					mNavItem[cacheIndex].cover.getHeight(), 
 				    					mColorComponentBuffer, 
 				    					mTheme);
 			    			}
@@ -806,9 +812,11 @@ public class RockOnWallRenderer extends RockOnRenderer implements GLSurfaceView.
 				    		{
 				    			mNavItemUtils.fillAlbumUnknownBitmap(
 				    					mNavItem[cacheIndex], 
-				    					mContext.getResources(), 
-				    					mNavItem[cacheIndex].cover.getWidth(), 
-				    					mNavItem[cacheIndex].cover.getHeight(), 
+				    					mContext,
+				    					mBitmapWidth,
+				    					mBitmapHeight,
+//				    					mNavItem[cacheIndex].cover.getWidth(), 
+//				    					mNavItem[cacheIndex].cover.getHeight(), 
 				    					mColorComponentBuffer, 
 				    					mTheme);	
 				    		}

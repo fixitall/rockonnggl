@@ -3,6 +3,7 @@
 	android:id="@+id/lock_screen_main"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
+	android:layout_margin="8dp"
 	>
 	<TextView
 		android:id="@+id/lock_screen_current_time"
@@ -25,7 +26,7 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
 		android:layout_centerInParent="true"
-		android:background="@drawable/appwidget_bg"
+		android:background="@drawable/appwidget_dark_bg"
 		android:padding="18dp"
 		android:layout_margin="-36dp"
 		>
@@ -149,6 +150,7 @@
 		android:layout_marginBottom="-16dp"
 		android:text="@string/unlock_screen"
 		/>
+
 <!--				UNLOCK BUTTON		-->
 <!--		<Button-->
 <!--			android:id="@+id/unlock_in_lock_screen"-->
@@ -162,4 +164,5 @@
 <!--			android:background="@drawable/appwidget_bg"-->
 <!--			android:layout_centerHorizontal="true"-->
 <!--			/>-->
+
 </RelativeLayout>

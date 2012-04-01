@@ -374,6 +374,7 @@ public class ManualAlbumArtActivity extends Activity{
 						true); 	// forces resolution above minimum to avoid being 
 								// overriden the next time we search for covers
 				AlbumArtUtils.saveSmallAlbumCoverInSdCard(
+						getApplicationContext(),
 						((ManualArtChooserAdapter) arg0.getAdapter()).covers[arg2],
 						String.valueOf(mAlbumId));
 				Toast.makeText(

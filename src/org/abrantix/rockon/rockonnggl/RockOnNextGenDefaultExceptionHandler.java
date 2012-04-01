@@ -75,7 +75,9 @@ import android.util.Log;
 					context.getString(R.string.bug_report_intro_part_two)
 					);
 			message.append(String.format("-- Android Version: sdk=%s, release=%s, inc=%s\n",
-				Build.VERSION.SDK, Build.VERSION.RELEASE, Build.VERSION.INCREMENTAL));
+					Build.VERSION.SDK, Build.VERSION.RELEASE, Build.VERSION.INCREMENTAL));
+			message.append(String.format("-- Device=%s, Model=%s, Product=%s, VersionRelease:%s\n",
+					Build.DEVICE, Build.MODEL, Build.PRODUCT, Build.VERSION.RELEASE));
 			
 			Runtime rt = Runtime.getRuntime();
 			message.append(String.format("-- Memory free: %4.2fMB total: %4.2fMB max: %4.2fMB",

@@ -144,9 +144,16 @@ public class RockOnCubeRenderer extends RockOnRenderer implements GLSurfaceView.
     	}
         
     	/** init dimensions */
-    	mBitmapWidth = Constants.ALBUM_ART_TEXTURE_SIZE;
-    	mBitmapHeight = Constants.ALBUM_ART_TEXTURE_SIZE;
+    	mBitmapWidth = Constants.getAlbumArtTextureSize(mContext);
+    	mBitmapHeight = mBitmapWidth;
+        mLabelBitmapWidth = Constants.getLabelSizeCube(mContext);
+        mLabelBitmapHeight = mLabelBitmapWidth / 4;
         
+//        mBitmapWidth = Constants.ALBUM_ART_TEXTURE_SIZE;
+//    	  mBitmapHeight = Constants.ALBUM_ART_TEXTURE_SIZE;
+//        mLabelBitmapWidth = mBitmapWidth * 2;
+//        mLabelBitmapHeight = mLabelBitmapWidth / 4;
+    	
     	/** albumNavUtils */
     	mNavItemUtils = new NavItemUtils(mBitmapWidth, mBitmapHeight, mContext);
         
@@ -160,8 +167,8 @@ public class RockOnCubeRenderer extends RockOnRenderer implements GLSurfaceView.
     				mBitmapHeight, 
     				Bitmap.Config.RGB_565);
     		n.label = Bitmap.createBitmap(
-    				mBitmapWidth,
-    				mBitmapHeight/4,
+    				mLabelBitmapWidth,
+    				mLabelBitmapHeight,
     				Bitmap.Config.ARGB_8888);
     		mNavItem[i] = n;
 //    		mNavItem[i] = new NavItem();
@@ -383,7 +390,7 @@ public class RockOnCubeRenderer extends RockOnRenderer implements GLSurfaceView.
         gl.glFogx(GL10.GL_FOG_MODE, GL10.GL_LINEAR);
 //        gl.glFogx(GL10.GL_FOG_MODE, GL10.GL_EXP); // GL_EXP2 doesnt show anything
         gl.glFogf(GL10.GL_FOG_START, 4.5f);
-        gl.glFogf(GL10.GL_FOG_END, 5.5f);
+        gl.glFogf(GL10.GL_FOG_END, 6.0f);
 //        float[] fogColor = {.5f,.5f,.5f, 1.f};
 //        gl.glFogfv(GL10.GL_FOG_COLOR, FloatBuffer.wrap(fogColor));
         gl.glHint(GL10.GL_FOG_HINT, GL10.GL_NICEST);
@@ -908,16 +915,18 @@ public class RockOnCubeRenderer extends RockOnRenderer implements GLSurfaceView.
 		    		{
 		    			mNavItemUtils.fillAlbumUnknownBitmap(
 		    					mNavItem[cacheIndex], 
-		    					mContext.getResources(), 
-		    					mNavItem[cacheIndex].cover.getWidth(), 
-		    					mNavItem[cacheIndex].cover.getHeight(), 
+		    					mContext,
+		    					mBitmapWidth,
+		    					mBitmapHeight,
+//		    					mNavItem[cacheIndex].cover.getWidth(), 
+//		    					mNavItem[cacheIndex].cover.getHeight(), 
 		    					mColorComponentBuffer, 
 		    					mTheme);	
 		    		}
 		    		if(!mNavItemUtils.fillAlbumLabel(
 		    				mNavItem[cacheIndex],
-		    				mBitmapWidth,
-		    				mBitmapHeight/4))
+		    				mLabelBitmapWidth,
+		    				mLabelBitmapHeight))
 		    		{
 		    			if(!mNavItem[cacheIndex].label.isRecycled())
 		    				mNavItem[cacheIndex].label.eraseColor(Color.argb(0, 0, 0, 0));
@@ -947,16 +956,18 @@ public class RockOnCubeRenderer extends RockOnRenderer implements GLSurfaceView.
 			    		{
 			    			mNavItemUtils.fillAlbumUnknownBitmap(
 			    					mNavItem[cacheIndex], 
-			    					mContext.getResources(), 
-			    					mNavItem[cacheIndex].cover.getWidth(), 
-			    					mNavItem[cacheIndex].cover.getHeight(), 
+			    					mContext, 
+			    					mBitmapWidth,
+			    					mBitmapHeight,
+//			    					mNavItem[cacheIndex].cover.getWidth(), 
+//			    					mNavItem[cacheIndex].cover.getHeight(), 
 			    					mColorComponentBuffer, 
 			    					mTheme);	
 			    		}
 			    		if(!mNavItemUtils.fillArtistLabel(
 			    				mNavItem[cacheIndex],
-			    				mBitmapWidth,
-			    				mBitmapHeight/4))
+			    				mLabelBitmapWidth,
+			    				mLabelBitmapHeight))
 			    		{
 			    			if(!mNavItem[cacheIndex].label.isRecycled())
 			    				mNavItem[cacheIndex].label.eraseColor(Color.argb(0, 0, 0, 0));
@@ -1874,6 +1885,10 @@ public class RockOnCubeRenderer extends RockOnRenderer implements GLSurfaceView.
     private ArtistAlbumHelper[]	mArtistAlbumHelper;
     private	int					mBitmapWidth;
     private int 				mBitmapHeight;
+
+    private	int					mLabelBitmapWidth;
+    private int 				mLabelBitmapHeight;
+
     private byte[]				mColorComponentBuffer;
     private	boolean				mForceTextureUpdate = false;
     private int					mHeight = 0;

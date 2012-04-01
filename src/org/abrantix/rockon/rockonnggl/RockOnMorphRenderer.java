@@ -130,8 +130,13 @@ public class RockOnMorphRenderer extends RockOnRenderer implements GLSurfaceView
     	}
         
     	/** init dimensions */
-    	mBitmapWidth = Constants.ALBUM_ART_TEXTURE_SIZE;
-    	mBitmapHeight = Constants.ALBUM_ART_TEXTURE_SIZE;
+    	mBitmapWidth = Constants.getAlbumArtTextureSize(mContext);
+    	mBitmapHeight = mBitmapWidth;
+        mLabelBitmapWidth = Constants.getLabelSizeFlow(mContext);
+        mLabelBitmapHeight = mLabelBitmapWidth / 4;
+
+//    	mBitmapWidth = Constants.ALBUM_ART_TEXTURE_SIZE;
+//    	mBitmapHeight = Constants.ALBUM_ART_TEXTURE_SIZE;
         
     	/** albumNavUtils */
     	mNavItemUtils = new NavItemUtils(mBitmapWidth, mBitmapHeight, mContext);
@@ -146,8 +151,8 @@ public class RockOnMorphRenderer extends RockOnRenderer implements GLSurfaceView
     				mBitmapHeight, 
     				Bitmap.Config.RGB_565);
     		n.label = Bitmap.createBitmap(
-    				mBitmapWidth,
-    				mBitmapHeight/4,
+    				mLabelBitmapWidth,
+    				mLabelBitmapHeight,
     				Bitmap.Config.ARGB_8888);
     		mNavItem[i] = n;
 //    		mNavItem[i] = new NavItem();
@@ -843,7 +848,7 @@ public class RockOnMorphRenderer extends RockOnRenderer implements GLSurfaceView
 		    		{
 		    			mNavItemUtils.fillAlbumUnknownBitmap(
 		    					mNavItem[cacheIndex], 
-		    					mContext.getResources(), 
+		    					mContext, 
 		    					mNavItem[cacheIndex].cover.getWidth(), 
 		    					mNavItem[cacheIndex].cover.getHeight(), 
 		    					mColorComponentBuffer, 
@@ -851,8 +856,8 @@ public class RockOnMorphRenderer extends RockOnRenderer implements GLSurfaceView
 		    		}
 		    		if(!mNavItemUtils.fillAlbumLabel(
 		    				mNavItem[cacheIndex],
-		    				mBitmapWidth,
-		    				mBitmapHeight/4))
+		    				mLabelBitmapWidth,
+		    				mLabelBitmapHeight))
 		    		{
 		    			if(!mNavItem[cacheIndex].label.isRecycled())
 		    				mNavItem[cacheIndex].label.eraseColor(Color.argb(0, 0, 0, 0));
@@ -882,7 +887,7 @@ public class RockOnMorphRenderer extends RockOnRenderer implements GLSurfaceView
 			    		{
 			    			mNavItemUtils.fillAlbumUnknownBitmap(
 			    					mNavItem[cacheIndex], 
-			    					mContext.getResources(), 
+			    					mContext, 
 			    					mNavItem[cacheIndex].cover.getWidth(), 
 			    					mNavItem[cacheIndex].cover.getHeight(), 
 			    					mColorComponentBuffer, 
@@ -890,8 +895,8 @@ public class RockOnMorphRenderer extends RockOnRenderer implements GLSurfaceView
 			    		}
 			    		if(!mNavItemUtils.fillArtistLabel(
 			    				mNavItem[cacheIndex],
-			    				mBitmapWidth,
-			    				mBitmapHeight/4))
+			    				mLabelBitmapWidth,
+			    				mLabelBitmapHeight))
 			    		{
 			    			if(!mNavItem[cacheIndex].label.isRecycled())
 			    				mNavItem[cacheIndex].label.eraseColor(Color.argb(0, 0, 0, 0));
@@ -1521,6 +1526,8 @@ public class RockOnMorphRenderer extends RockOnRenderer implements GLSurfaceView
     private ArtistAlbumHelper[]	mArtistAlbumHelper;
     private	int					mBitmapWidth;
     private int 				mBitmapHeight;
+    private int 				mLabelBitmapWidth;
+    private int 				mLabelBitmapHeight;
     private byte[]				mColorComponentBuffer;
     private	boolean				mForceTextureUpdate = false;
     private int					mHeight = 0;

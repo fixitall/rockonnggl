@@ -74,6 +74,7 @@ public class BiDiReorder {
      * @return The converted string
      */
     public static String reorder(String text, float width, Paint paint, String wrap, boolean[] rtl) {
+    	
         if (rtl == null) {
             rtl = new boolean[1];
         }

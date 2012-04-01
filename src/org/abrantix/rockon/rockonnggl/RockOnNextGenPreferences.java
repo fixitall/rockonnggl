@@ -202,7 +202,7 @@ public class RockOnNextGenPreferences extends PreferenceActivity{
 			return true;
 		}
 	};
-	
+		
 	private OnPreferenceClickListener directoryFilterPreferenceClickListener = new OnPreferenceClickListener() {
 	
 		@Override

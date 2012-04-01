@@ -4,8 +4,11 @@ import java.io.File;
 
 import org.abrantix.rockon.rockonnggl.R;
 
+import android.content.Context;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Display;
+import android.view.WindowManager;
 
 public class Constants{
 
@@ -157,14 +160,14 @@ public class Constants{
 	
 	/** Playlist Alphabetical Sorting **/
 	static final String playlistAlphabeticalSorting = 
-		MediaStore.Audio.Playlists.NAME + " COLLATE NOCASE ASC";
+		MediaStore.Audio.Playlists.NAME + " COLLATE LOCALIZED COLLATE NOCASE ASC";
 	
 	/** Album Cursor Sorting **/
 	static final String albumAlphabeticalSortOrder = 
 		MediaStore.Audio.Albums.ALBUM_KEY + " ASC";
 	
 	static final String albumAlphabeticalSortOrderByArtist = 
-		MediaStore.Audio.Albums.ARTIST + " COLLATE NOCASE ASC"
+		MediaStore.Audio.Albums.ARTIST + " COLLATE LOCALIZED COLLATE NOCASE ASC"
 		+ ", " + 
 		MediaStore.Audio.Albums.LAST_YEAR + " DESC";
 	
@@ -183,7 +186,7 @@ public class Constants{
 	static final String songListAlbumAndNumericalSorting = 
 //		MediaStore.Audio.Media.YEAR + " DESC " + 
 //		", "+
-		MediaStore.Audio.Media.ALBUM + " COLLATE NOCASE ASC"+
+		MediaStore.Audio.Media.ALBUM + " COLLATE LOCALIZED COLLATE NOCASE ASC"+
 		", "+
 		MediaStore.Audio.Media.TRACK + " ASC";
 	static final String songListPlaylistSorting = 
@@ -291,6 +294,55 @@ public class Constants{
 	static final int MIN_ALBUM_ART_SIZE = 100;
 	static final int REASONABLE_ALBUM_ART_SIZE = 256;
 	static final int ALBUM_ART_TEXTURE_SIZE = 256;
+	
+	
+	static final int getLabelSizeBoring(Context ctx) {
+		int max = getMaxScreenDim(ctx);
+		if(max > 855) {
+			return 512;
+		} else if(max > 500){
+			return 512;
+		} else {
+			return 256;
+		}
+	}
+	
+	static final int getLabelSizeCube(Context ctx) {
+		int max = getMaxScreenDim(ctx);
+		if(max > 700) {
+			return 512;
+		} else if(max > 400){
+			return 256;
+		} else {
+			return 128;
+		}
+	}
+	
+	static final int getLabelSizeFlow(Context ctx) {
+		int max = getMaxScreenDim(ctx);
+		if(max > 700) {
+			return 512;
+		} else if(max > 400){
+			return 256;
+		} else {
+			return 128;
+		}
+	}
+	
+	static final int getAlbumArtTextureSize(Context ctx) {
+		int max = getMaxScreenDim(ctx);
+		if(max > 855) {
+			return 512;
+		} else {
+			return 256;
+		}
+	}
+	
+	static int getMaxScreenDim(Context ctx) {
+		WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		return Math.max(display.getWidth(), display.getHeight());
+	}
 	
 	/** Search Parameters */
 	static final float SIMILARITY_THRESHOLD = 0.66f;

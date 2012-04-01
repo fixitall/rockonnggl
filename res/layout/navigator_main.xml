@@ -192,5 +192,5 @@
 	    android:layout_marginBottom="@dimen/button_default_height"
 	    android:layout_alignParentRight="true"
     	/>    
-	    android:layout_above="@id/player_artist_album_drag_switcher"
+<!--	    android:layout_above="@id/player_artist_album_drag_switcher"-->
 </RelativeLayout>

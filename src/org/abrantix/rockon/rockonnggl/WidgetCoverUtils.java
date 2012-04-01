@@ -54,25 +54,29 @@ class WidgetCoverUtils{
 			albumCoverPath = path;
 		} else {
 			Log.i(TAG, " - album cover bmp file has a problem "+path);
-			albumCoverPath = null;
-//			return null;
+			albumCoverPath = 
+				Constants.ROCKON_SMALL_ALBUM_ART_PATH+
+				Constants.ROCKON_UNKNOWN_ART_FILENAME;
+			Log.i(TAG, " - replacing album cover with "+albumCoverPath);
 		}
+		albumCoverFile = new File(albumCoverPath);
 		
 		Bitmap cover = null;
 		/** Read File and fill bitmap */
 		if(albumCoverPath != null){
 			try {
-				byte[] colorComponent = new byte[4*width*height];
-				FileInputStream albumCoverFileInputStream = new FileInputStream(albumCoverFile);
-				albumCoverFileInputStream.read(colorComponent, 0, colorComponent.length);
-				cover = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-				cover.copyPixelsFromBuffer(ByteBuffer.wrap(colorComponent));
-//				cover = BitmapFactory.decodeStream(new FileInputStream(albumCoverFile));
-			} catch (FileNotFoundException e) {
+				if(albumCoverFile.length() == 2*width*height) {
+					byte[] colorComponent = new byte[2*width*height];
+					FileInputStream albumCoverFileInputStream = new FileInputStream(albumCoverFile);
+					albumCoverFileInputStream.read(colorComponent, 0, colorComponent.length);
+					cover = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+					cover.copyPixelsFromBuffer(ByteBuffer.wrap(colorComponent));
+	//				cover = BitmapFactory.decodeStream(new FileInputStream(albumCoverFile));
+	//				cover = BitmapFactory.decodeFile(albumCoverPath);
+				}
+			} catch (Exception e) {
 				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			} 
 		} 
 		
 		/** Failed reading the bitmap, load the default */
@@ -84,9 +88,35 @@ class WidgetCoverUtils{
 			Log.i(TAG, "Cover was not created");
 		}
 		
-		Bitmap wickedBitmap = createWickedBitmapFromCover(cover, artistName, trackName);
-		return wickedBitmap;
-			
+		Bitmap wickedBitmap = createNotSoWickedBitmapFromCover(cover, artistName, trackName);
+		return wickedBitmap;	
+	}
+	
+	private static Bitmap createNotSoWickedBitmapFromCover(
+			Bitmap cover,
+			String artistName,
+			String trackName)
+	{
+		Bitmap bm = Bitmap.createBitmap(cover.getWidth(), cover.getHeight(), Bitmap.Config.ARGB_8888);
+		Canvas c = new Canvas(bm);
+		Paint p = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG);
+		p.setAlpha(0xe9);
+		
+		Rect src = new Rect();
+		Rect dst = new Rect();
+		
+		src.left = 3;
+		src.right = cover.getWidth() - 3;
+		src.top = 3;
+		src.bottom = cover.getHeight() - 3;
+		
+		dst.left = 0;
+		dst.right = cover.getWidth();
+		dst.top = 0;
+		dst.bottom = cover.getHeight();
+		
+		c.drawBitmap(cover, src, dst, p);
+		return bm;
 	}
 	
 	/* optimization */
@@ -121,7 +151,7 @@ class WidgetCoverUtils{
 		Camera cam = new Camera();
 		cam.translate(0.f, 0.f, cover.getHeight()*.0001f);
 		cam.translate(-.5f*cover.getWidth(), .5f*cover.getHeight(), 0.f);
-		cam.rotateX(-20.f);
+		cam.rotateX(-7.5f);
 		cam.rotateY(-0.f);
 		cam.applyToCanvas(canvas);
 		
@@ -186,13 +216,16 @@ class WidgetCoverUtils{
 			// need to set the font here otherwise we cannot measure text
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 			paint.setTextAlign(Align.CENTER);
-			paint.setTextSize(22.f);
+//			paint.setTextSize(22.f);
+			paint.setTextSize(cover.getWidth() * 0.075f);
+			
 	        trackName = BiDiReorder.reorder(trackName, cover.getWidth(), paint, "...");
 			textWidth = (int)paint.measureText(trackName);
 			
 			/* measure artistName */
 //			paint.setTypeface(Typeface.DEFAULT);
-			paint.setTextSize(18.f);
+//			paint.setTextSize(18.f);
+			paint.setTextSize(cover.getWidth() * 0.055f);
             artistName = BiDiReorder.reorder(artistName, cover.getWidth(), paint, "...");
 			textWidth = (int) Math.max(textWidth, paint.measureText(artistName));
 			
@@ -221,13 +254,13 @@ class WidgetCoverUtils{
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 //			paint.setTypeface(Typeface.DEFAULT_BOLD);
 			paint.setTextAlign(Align.CENTER);
-			paint.setTextSize(22.f);
+			paint.setTextSize(cover.getWidth() * 0.075f);
 			canvas.drawText(trackName, wickedBitmap.getWidth()/2-6, 24, paint);
 			
 			/* write artist name */
 			paint.setColor(Color.argb(255, 200, 200, 200));
 //			paint.setTypeface(Typeface.DEFAULT);
-			paint.setTextSize(18.f);
+			paint.setTextSize(cover.getWidth() * 0.055f);
 			canvas.drawText(artistName, wickedBitmap.getWidth()/2-6, 48, paint);
 		}
 		return wickedBitmap;

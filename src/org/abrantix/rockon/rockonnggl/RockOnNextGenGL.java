@@ -265,7 +265,7 @@ public class RockOnNextGenGL extends Activity {
 //        /**
 //         * PontiflexAds
 //         */
-//        showPontiflexAds(true);
+//        showPontiflexAds(true);        
     }
     
     /** OnStart */
@@ -291,7 +291,6 @@ public class RockOnNextGenGL extends Activity {
     /** OnResume */
     public void onResume(){
     	super.onResume();
-//    	Log.i(TAG, "ON RESUME!");
     	if(mIsSdCardPresentAndHasMusic)
     	{
 	    	resumeState();
@@ -452,9 +451,9 @@ public class RockOnNextGenGL extends Activity {
     		if(menuOptionsTitleArray[i].equals(getString(R.string.menu_option_title_preferences)))
     			menu.getItem(i).setIcon(android.R.drawable.ic_menu_preferences);
     		else if(menuOptionsTitleArray[i].equals(getString(R.string.menu_option_title_playlist_id)))
-    			menu.getItem(i).setIcon(R.drawable.ic_mp_current_playlist_btn);
+    			menu.getItem(i).setIcon(R.drawable.ic_menu_playlists);
     		else if(menuOptionsTitleArray[i].equals(getString(R.string.menu_option_title_get_art)))
-    			menu.getItem(i).setIcon(R.drawable.ic_menu_music_library);
+    			menu.getItem(i).setIcon(R.drawable.ic_menu_get_art);
     		else if(menuOptionsTitleArray[i].equals(getString(R.string.menu_option_title_view_mode)))
     			menu.getItem(i).setIcon(android.R.drawable.ic_menu_view);
     		else if(menuOptionsTitleArray[i].equals(getString(R.string.menu_option_title_theme)))
